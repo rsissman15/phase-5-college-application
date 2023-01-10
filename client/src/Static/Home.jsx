@@ -16,10 +16,10 @@ const BannerContainer = styled.div`
     box-shadow: inset 5px 5px 10px 4px #000000;
 `;
 
-function Home({ }) {
+function Home() {
     
 
-    const NextArrow = ({  }) => {
+    const NextArrow = () => {
         return (
             <div className="arrow next" style={{ backgroundColor: "rgba(162, 208, 162, 0.02)" }}>
                 <div>
@@ -28,7 +28,7 @@ function Home({ }) {
             </div>
         )
     }
-    const PreviousArrow = ({ }) => {
+    const PreviousArrow = () => {
         return (
             <div className="arrow previous" style={{ backgroundColor: "rgba(162, 208, 162, 0.02)" }}>
                 <h1 style={{ fontSize: "150px" }}>{"<"}</h1>
