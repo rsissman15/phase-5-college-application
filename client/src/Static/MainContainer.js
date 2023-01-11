@@ -4,17 +4,9 @@ import Home from './Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './NavBar';
 import LoginPage from '../Authentication/LoginPage';
+import SignUp from '../Authentication/SignUp';
 
 function MainContainer() {
-  const [count, setCount] = useState({});
-
-  useEffect(() => {
-    fetch("/all_colleges")
-      .then((r) => r.json())
-      .then((data) => setCount(data));
-  }, []);
-
-  console.log(count)
 
   return (
     <BrowserRouter>
@@ -23,6 +15,7 @@ function MainContainer() {
         <Routes>
           <Route path="/home" element={<Home/>}></Route>
           <Route path="/login" element={<LoginPage/>}></Route>
+          <Route path="/signup" element={<SignUp/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

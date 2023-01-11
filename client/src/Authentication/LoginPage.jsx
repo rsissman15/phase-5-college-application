@@ -1,16 +1,35 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-
 import TextField from '@mui/material/TextField';
-
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useState } from 'react';
+
 
 function LoginPage() {
+    const [formData,setFormData]=useState({
+        username:"",
+        password:""
+    
+      })
+
+    
+      const handleChange=(e)=>{
+        setFormData({
+          ...formData,
+          [e.target.name]:e.target.value
+        })
+      }
+
+   
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        console.log(e)
+      }
  
   return (
     <div>
@@ -39,6 +58,8 @@ function LoginPage() {
               label="Username"
               name="username"
               autoComplete="username"
+              value={formData.username}
+              onChange={handleChange}
               autoFocus
             />
             <TextField
@@ -49,6 +70,8 @@ function LoginPage() {
               label="Password"
               type="password"
               id="password"
+              value={formData.password}
+              onChange={handleChange}
               autoComplete="current-password"
             />
             <Button

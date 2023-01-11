@@ -40,7 +40,7 @@ function Home() {
         <div className="homepage-container">
             <BannerContainer >
                 <h1 style={{ color: "white", fontSize: "80px", textAlign: "center", textShadow: "2px 2px black" }}>Welcome to the College Organizer App</h1>
-                <h2 style={{ color: "white", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>FREE shipping on all orders</h2>
+                <h2 style={{ color: "white", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>An Application to help you stay organized during your college search</h2>
             </BannerContainer>
         </div>
     );
