@@ -22,7 +22,7 @@ function MainContainer() {
         <Navbar/>
         <Routes>
           <Route path="/home" element={<Home/>}></Route>
-            <Route path="/login" element={<LoginPage/>}></Route>
+          <Route path="/login" element={<LoginPage/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

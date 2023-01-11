@@ -1,31 +1,21 @@
-import React from 'react'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import IconButton from '@mui/material/IconButton';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  }
-}));
 
-const Navbar = ({loggedIn,logoutUser,currentUser}) => {
-  const classes = useStyles();
-
-    return(
-      <div className={classes.root}>
+export default function NavBar() {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to="/home">Homepage</Link>
+          </Typography>
           <Button color="inherit">
             <Link to="/login">Login</Link>
           </Button>
@@ -34,11 +24,6 @@ const Navbar = ({loggedIn,logoutUser,currentUser}) => {
           </Button>
         </Toolbar>
       </AppBar>
-    </div>
-
-    )
-  }
-
-
-
-export default Navbar
+    </Box>
+  );
+}
