@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React,{useState,useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,20 +9,23 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useState } from 'react';
+import { header,baseUrl,getToken } from '../Globals.js';
+
 
 
 
 
 // const theme = createTheme();
 
-function SignUp() {
+function SignUp({loggedIn,logInUser}) {
   const [formData,setFormData]=useState({
     email:"",
     username:"",
     password:""
 
   })
+  const [errors, setErrors] = useState([]);
+  const navigate=useNavigate();
 
   const handleChange=(e)=>{
     setFormData({
@@ -30,11 +34,36 @@ function SignUp() {
     })
   }
 
+ useEffect(()=>{
+  if(loggedIn){
+      navigate('/home')
+  }
+ },[loggedIn])
 
   const handleSubmit=(e)=>{
-    e.preventDefault()
-    console.log(e)
+      e.preventDefault();
+      fetch(baseUrl+'/users',{
+          method:'POST',
+          headers: {
+              ...header,
+              ...getToken()
+            },
+          body:JSON.stringify(formData)
+      })
+          .then((response) => {
+              if (response.ok) {
+                  response.json().then((data) =>{
+                      logInUser(data.user)
+                      localStorage.setItem('jwt', data.token)
+                      navigate('/home')       
+                  });
+              } 
+              else {
+                  response.json().then((errorData) =>  setErrors(errorData.errors));
+              }
+          })
   }
+
    
 
   return (
@@ -55,7 +84,7 @@ function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 3 }}>
+          <Box  component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField

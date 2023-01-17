@@ -1,12 +1,12 @@
 // client/src/components/App.js
 import React from "react";
-import { useState, useEffect } from "react";
-import MainContainer from "./Static/MainContainer";
+import MainContainer from "./Components/Static/MainContainer";
+
 
 function App() {
 
   return (
-    <MainContainer/>
+   <MainContainer/>
     
   );
 }
