@@ -9,7 +9,7 @@ class User < ApplicationRecord
     validate :password_special_char
     validate :password_contains_number
     validates :username, uniqueness: true
-    validates :email, uniqueness: true
+    validates :email, uniqueness: true , format: { with: URI::MailTo::EMAIL_REGEXP } 
   
     def password_uppercase
       return if !!password.match(/\p{Upper}/)

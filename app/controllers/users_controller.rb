@@ -12,13 +12,14 @@ class UsersController < ApplicationController
     def show
         render json: @user
     end
-
+  # POST /users
     def create
+        #@user=User.new(user_params)
         @user=User.create!(user_params)
         @token=encode_token({user_id:@user.id})
         render json: {user:@user, token: @token}, status: :created
-    
-      rescue ActiveRecord::RecordInvalid => e
+
+    rescue ActiveRecord::RecordInvalid => e
         render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
         
     end

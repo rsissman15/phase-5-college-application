@@ -24,8 +24,6 @@ function MainContainer() {
       fetch(baseUrl+'/get-current-user',{
         method:'GET',
         headers:{
-          mode: 'cors',
-          credentials: 'include',
           ...header,
           ...getToken()
         }
@@ -35,6 +33,7 @@ function MainContainer() {
     )} 
   },[loggedIn])
 
+
   const logoutUser=()=>{
     setCurrentUser({})
     setLoggedIn(false)
@@ -42,11 +41,15 @@ function MainContainer() {
 
   }
 
+  
+  console.log(currentUser)
+  console.log(loggedIn)
+
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar/>
+        <Navbar loggedIn={loggedIn} currentUser={currentUser} logoutUser={logoutUser}/>
         <Routes>
           <Route path="/home" element={<Home/>}></Route>
           <Route path="/login" element={<LoginPage/>}></Route>

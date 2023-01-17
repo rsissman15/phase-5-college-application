@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    skip_before_action :authorized, only: [:create]
 
     def get_current_user
         render json: current_user
@@ -6,6 +7,7 @@ class SessionsController < ApplicationController
 
 
     def create
+        @user=User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
             @token=encode_token({user_id:@user.id})
             render json: {user:@user, token: @token}, status: :ok 
@@ -15,9 +17,7 @@ class SessionsController < ApplicationController
     
     end
     private
-    def find_user
-        @user=User.find_by(username: params[:username])
-    end
+   
     def user_login_params
         params.permit(:username,:password)
     end
