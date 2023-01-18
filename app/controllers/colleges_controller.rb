@@ -1,4 +1,5 @@
 class CollegesController < ApplicationController
+    
     require 'rest-client'
     def get_colleges
         url="http://universities.hipolabs.com/search?name="

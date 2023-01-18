@@ -18,25 +18,23 @@ import { header,baseUrl,getToken } from '../Globals.js';
 // const theme = createTheme();
 
 function SignUp({loggedIn,logInUser}) {
-  // const [formData,setFormData]=useState({
-  //   email:"",
-  //   username:"",
-  //   password:""
+  const [formData,setFormData]=useState({
+    email:"",
+    username:"",
+    password:""
 
-  // })
-  const [username,setUsername]=useState('')
-  const[password,setPassword]=useState('')
-  const [email,setEmail]=useState('')
+  })
+
 
   const [errors, setErrors] = useState([]);
   const navigate=useNavigate();
 
-  // const handleChange=(e)=>{
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]:e.target.value
-  //   })
-  // }
+  const handleChange=(e)=>{
+    setFormData({
+      ...formData,
+      [e.target.name]:e.target.value
+    })
+  }
 
  useEffect(()=>{
   if(loggedIn){
@@ -46,25 +44,20 @@ function SignUp({loggedIn,logInUser}) {
 
   const handleSubmit=(e)=>{
       e.preventDefault();
-      const strongParams = {
-            username,
-            password,
-            email 
-    }
       fetch(baseUrl+'/users',{
           method:'POST',
           headers: {
               ...header,
               ...getToken()
             },
-          body:JSON.stringify(strongParams)
+          body:JSON.stringify(formData)
       })
           .then((response) => {
               if (response.ok) {
                   response.json().then((data) =>{
                       logInUser(data.user)
                       localStorage.setItem('jwt', data.token)
-                      navigate('/home')       
+                      navigate('/home')
                   });
               } 
               else {
@@ -73,7 +66,8 @@ function SignUp({loggedIn,logInUser}) {
           })
   }
 
-   
+
+  
 
   return (
     
@@ -103,8 +97,8 @@ function SignUp({loggedIn,logInUser}) {
                   label="email"
                   name="email"
                   autoComplete="email"
-                  value={email}
-                  onChange={e=>setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,8 +109,8 @@ function SignUp({loggedIn,logInUser}) {
                   label="username"
                   name="username"
                   autoComplete="username"
-                  value={username}
-                  onChange={e=>setUsername(e.target.value)}
+                  value={formData.username}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -127,9 +121,8 @@ function SignUp({loggedIn,logInUser}) {
                   label="Password"
                   type="password"
                   id="password"
-                  value={password}
-                  autoComplete="new-password"
-                  onChange={e=>setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>

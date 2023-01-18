@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React,{useState,useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -7,17 +8,18 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useState } from 'react';
+import { header,baseUrl,getToken } from '../Globals.js';
 
 
-function LoginPage() {
+function LoginPage({logInUser,loggedIn}) {
     const [formData,setFormData]=useState({
         username:"",
         password:""
     
       })
+    const navigate=useNavigate();
+    const [errors, setErrors] = useState([]);
 
-    
       const handleChange=(e)=>{
         setFormData({
           ...formData,
@@ -25,17 +27,51 @@ function LoginPage() {
         })
       }
 
-   
-    const handleSubmit=(e)=>{
-        e.preventDefault()
-        console.log(e)
-      }
+
+      useEffect(()=>{
+        if(loggedIn){
+            navigate('/home')
+        }
+       },[loggedIn])
+
+
+       const handleSubmit=(e)=>{
+        
+        e.preventDefault();
+        
+        fetch(baseUrl+'/login',{
+            method:'POST',
+            headers: {
+              ...header,
+              ...getToken()
+            },
+            body:JSON.stringify(formData)
+        })
+
+            .then((response) => {
+              if (response.ok) {
+                  response.json().then((data) =>{
+                    logInUser(data.user)
+                    localStorage.setItem('jwt', data.token)
+                    navigate('/home')  
+                    console.log(data)
+                  });
+              } 
+              else {
+                    response.json().then((errorData) =>  setErrors(errorData.errors));
+              }
+          })
+    }
+      
+
+ 
  
   return (
     <div>
       
       <Container >
         <Box
+          onSubmit={handleSubmit}
           sx={{
             marginTop: 8,
             display: 'flex',

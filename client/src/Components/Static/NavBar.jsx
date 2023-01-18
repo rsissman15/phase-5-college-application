@@ -58,13 +58,13 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
         <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-             <Link to="/">Homepage</Link>
+             <Link to="/home">Homepage</Link>
           </Typography>
           <Button color="inherit">
             <a href="#"onClick={handleLogout}>Logout</a>
           </Button>
           <Button color="inherit">
-            <Link to="/colleges">Colleges</Link>
+            <Link to="/all_colleges">Colleges</Link>
           </Button>
           <Button color="inherit">
             <Link to="/applications">Applications</Link>

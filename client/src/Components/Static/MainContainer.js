@@ -6,17 +6,37 @@ import Navbar from './NavBar';
 import LoginPage from '../Authentication/LoginPage';
 import SignUp from '../Authentication/SignUp';
 import { header,baseUrl,getToken } from '../Globals.js';
+import CollegeList from '../Colleges/CollegeList';
 
 
 function MainContainer() {
   const [currentUser,setCurrentUser]=useState({})
   const [loggedIn,setLoggedIn]=useState(false)
+  const [colleges,setColleges]=useState([])
+  const [start,setStart]=useState(0)
+  const [search, setSearch] = useState('')
+
+  colleges.sort(function(a, b){
+    if(a.name < b.name) { return -1; }
+    if(a.name > b.name) { return 1; }
+    return 0;
+})
+
+  const displayColleges=colleges.slice(start,start+15)
+  const filterColleges=displayColleges.filter(college => college.name.toLowerCase().includes(search.toLowerCase()))
+  
+
+  const handleMoreColleges=()=>{
+    setStart((start+15)%colleges.length)
+  }
   
 
   const logInUser=(user)=>{
     setCurrentUser(user)
     setLoggedIn(true)
   }
+
+
 
   useEffect(()=>{
     const token=localStorage.getItem('jwt')
@@ -29,9 +49,27 @@ function MainContainer() {
         }
       })
       .then(res=>res.json())
-      .then(user=>logInUser(user)
+      .then(user=>{
+        logInUser(user)
+      }
+        
+    )} 
+    if(loggedIn){
+      fetch(baseUrl+'/all_colleges',{
+        method:'GET',
+        headers:{
+          ...header,
+          ...getToken()
+        }
+      })
+      .then(res=>res.json())
+      .then(college=>
+        setColleges(college)
     )} 
   },[loggedIn])
+
+
+
 
 
   const logoutUser=()=>{
@@ -41,9 +79,7 @@ function MainContainer() {
 
   }
 
-  
-  console.log(currentUser)
-  console.log(loggedIn)
+
 
 
   return (
@@ -52,8 +88,9 @@ function MainContainer() {
         <Navbar loggedIn={loggedIn} currentUser={currentUser} logoutUser={logoutUser}/>
         <Routes>
           <Route path="/home" element={<Home/>}></Route>
-          <Route path="/login" element={<LoginPage/>}></Route>
+          <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
+          <Route path='/all_colleges' element={<CollegeList colleges={filterColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch}/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
