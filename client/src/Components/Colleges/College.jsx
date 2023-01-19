@@ -2,9 +2,15 @@ import React from 'react'
 
 const College = ({college}) => {
   return (
-    <ul>
+    <div>
+       <ul>
         {college}
-    </ul>
+        <button>Add Application</button>
+        </ul>
+        
+
+    </div>
+   
   )
 }
 

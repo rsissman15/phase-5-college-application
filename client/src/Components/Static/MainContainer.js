@@ -22,8 +22,9 @@ function MainContainer() {
     return 0;
 })
 
-  const displayColleges=colleges.slice(start,start+15)
-  const filterColleges=displayColleges.filter(college => college.name.toLowerCase().includes(search.toLowerCase()))
+  
+  const filterColleges=colleges.filter(college => college.name.toLowerCase().includes(search.toLowerCase()))
+  const displayColleges=filterColleges.slice(start,start+15)
   
 
   const handleMoreColleges=()=>{
@@ -55,7 +56,7 @@ function MainContainer() {
         
     )} 
     if(loggedIn){
-      fetch(baseUrl+'/all_colleges',{
+      fetch(baseUrl+'/colleges',{
         method:'GET',
         headers:{
           ...header,
@@ -63,8 +64,12 @@ function MainContainer() {
         }
       })
       .then(res=>res.json())
-      .then(college=>
+      .then(college=>{
         setColleges(college)
+
+
+      }
+       
     )} 
   },[loggedIn])
 
@@ -90,7 +95,7 @@ function MainContainer() {
           <Route path="/home" element={<Home/>}></Route>
           <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
-          <Route path='/all_colleges' element={<CollegeList colleges={filterColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch}/>}></Route>
+          <Route path='/all_colleges' element={<CollegeList colleges={displayColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch}/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,4 +1,4 @@
 class College < ApplicationRecord
     has_many :applications
-    has many :users, through: :applications
+    has_many :users, through: :applications
 end
