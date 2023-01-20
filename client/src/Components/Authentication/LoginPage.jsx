@@ -54,7 +54,6 @@ function LoginPage({logInUser,loggedIn}) {
                     logInUser(data.user)
                     localStorage.setItem('jwt', data.token)
                     navigate('/home')  
-                    console.log(data)
                   });
               } 
               else {
