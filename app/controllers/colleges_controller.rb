@@ -1,20 +1,17 @@
 class CollegesController < ApplicationController
-    #skip_before_action :authorized, only:[:index,:destroy]
-    require 'rest-client'
-    def get_colleges
-        url="http://universities.hipolabs.com/search?name="
-        response= RestClient.get(url)
-        render json: response
-    end
+    before_action :find_college, only: %i[ show update destroy ]
+    skip_before_action :authorized, only: [:create]
+
 
     def index
        @colleges=College.all
        render json: @colleges
     end
 
-    def index
-        @colleges=College.all
-        render json: @colleges
+    def show
+        binding.pry
+        college=find_college
+        render json: college
     end
 
     def destroy
@@ -23,14 +20,9 @@ class CollegesController < ApplicationController
         head :no_content
     end
 
-    # def index
-
-    #     @colleges=College.all
-    #     render json: @colleges
-    # end
-
     private
-    # def find_college
-    #     College.find(params[:id])
-    # end
+    def find_college
+     
+        College.find(params[:id])
+    end
 end

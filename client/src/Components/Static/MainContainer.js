@@ -7,6 +7,8 @@ import LoginPage from '../Authentication/LoginPage';
 import SignUp from '../Authentication/SignUp';
 import { header,baseUrl,getToken } from '../Globals.js';
 import CollegeList from '../Colleges/CollegeList';
+import College from '../Colleges/College';
+
 
 
 function MainContainer() {
@@ -95,7 +97,8 @@ function MainContainer() {
           <Route path="/home" element={<Home/>}></Route>
           <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
-          <Route path='/all_colleges' element={<CollegeList colleges={displayColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch}/>}></Route>
+          <Route path='/colleges' element={<CollegeList colleges={displayColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
+          <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn}/> } />
         </Routes>
       </div>
     </BrowserRouter>

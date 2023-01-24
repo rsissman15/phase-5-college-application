@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function NavBar({loggedIn,logoutUser,currentUser}) {
+export default function NavBar({loggedIn,logoutUser}) {
   const classes = useStyles();
 
   const logOutLinks=()=>{
@@ -64,7 +64,7 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
             <a href="#"onClick={handleLogout}>Logout</a>
           </Button>
           <Button color="inherit">
-            <Link to="/all_colleges">Colleges</Link>
+            <Link to="/colleges">Colleges</Link>
           </Button>
           <Button color="inherit">
             <Link to="/applications">Applications</Link>
