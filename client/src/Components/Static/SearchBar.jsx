@@ -1,4 +1,6 @@
 import React from 'react'
+import Box from '@mui/material/Box';
+
 
 const SearchBar = ({search,setSearch}) => {
 
@@ -6,15 +8,34 @@ const SearchBar = ({search,setSearch}) => {
     setSearch(e.target.value)
   }
   return (
+  
+
     <div className="searchbar">
-      <label htmlFor="search">Search Colleges:</label>
-      <input
-        type="text"
-        id="search"
-        placeholder="Type a name to search..."
-        onChange={handleChange}
-        value={search}
-      />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+
+          <input
+          style={{ height: 50, width: "50%", borderColor: 'black', borderWidth: 5,  marginBottom: 20 }}
+          type="text"
+          id="search"
+          placeholder="Search Colleges..."
+          onChange={handleChange}
+          value={search}
+          textAlign='center'
+          fontWeight= 'bold'
+    
+            />
+
+
+
+        </Box>
+  
   </div>
   )
 }

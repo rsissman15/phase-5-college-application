@@ -38,7 +38,7 @@ function SignUp({loggedIn,logInUser}) {
 
  useEffect(()=>{
   if(loggedIn){
-      navigate('/home')
+      navigate('/colleges')
   }
  },[loggedIn])
 
@@ -57,7 +57,7 @@ function SignUp({loggedIn,logInUser}) {
                   response.json().then((data) =>{
                       logInUser(data.user)
                       localStorage.setItem('jwt', data.token)
-                      navigate('/home')
+                      navigate('/colleges')
                   });
               } 
               else {
@@ -82,7 +82,7 @@ function SignUp({loggedIn,logInUser}) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'blue' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -130,14 +130,21 @@ function SignUp({loggedIn,logInUser}) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2,className:"ms-3" }}
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container>
               <Grid item>
                 <Link href="/login" variant="body2">
                   Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item>
+                <Link href="/home" variant="body2">
+                  {"Go back"}
                 </Link>
               </Grid>
             </Grid>

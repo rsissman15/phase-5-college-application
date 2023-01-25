@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { header,baseUrl,getToken } from '../Globals.js';
 
 
+
 function LoginPage({logInUser,loggedIn}) {
     const [formData,setFormData]=useState({
         username:"",
@@ -30,7 +31,7 @@ function LoginPage({logInUser,loggedIn}) {
 
       useEffect(()=>{
         if(loggedIn){
-            navigate('/home')
+            navigate('/colleges')
         }
        },[loggedIn])
 
@@ -53,7 +54,7 @@ function LoginPage({logInUser,loggedIn}) {
                   response.json().then((data) =>{
                     logInUser(data.user)
                     localStorage.setItem('jwt', data.token)
-                    navigate('/home')  
+                    navigate('/colleges')  
                   });
               } 
               else {
@@ -78,7 +79,7 @@ function LoginPage({logInUser,loggedIn}) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'blue' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
             Log in
@@ -113,7 +114,7 @@ function LoginPage({logInUser,loggedIn}) {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, className:"ms-3"}}
             >
               Sign In
             </Button>
@@ -121,6 +122,13 @@ function LoginPage({logInUser,loggedIn}) {
               <Grid item>
                 <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item>
+                <Link href="/home" variant="body2">
+                  {"Go back"}
                 </Link>
               </Grid>
             </Grid>

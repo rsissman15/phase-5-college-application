@@ -4,6 +4,7 @@ import SearchBar from '../Static/SearchBar'
 import Colleges from './Colleges'
 import MoreColleges from './MoreColleges'
 import { useNavigate } from 'react-router-dom'
+import Box from '@mui/material/Box';
 
 
 
@@ -24,7 +25,17 @@ const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn}) =
   return (
     <div>
       <SearchBar search={search} setSearch={setSearch}/>
-      {displayColleges}
+      <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+           {displayColleges}
+        </Box>
+     
       <MoreColleges handleMoreColleges={handleMoreColleges}/>
     </div>
   )

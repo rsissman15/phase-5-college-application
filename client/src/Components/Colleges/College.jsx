@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
+import ApplicationForm from '../Applications/ApplicationForm';
 
 
 const College = ({colleges,loggedIn}) => {
@@ -31,6 +32,11 @@ const College = ({colleges,loggedIn}) => {
       const [college,setCollege]=useState([])
       const { id }=useParams();
       const navigate=useNavigate();
+      const [showForm,setShowForm]=useState(false)
+
+      const handleForm=()=>{
+        setShowForm(click=>!click)
+      }
 
       useEffect(()=>{
         const college=colleges.find(a=>a.id.toString()===id)
@@ -54,6 +60,9 @@ const College = ({colleges,loggedIn}) => {
         <Typography gutterBottom variant="h3" component="h1">
             {college.web_pages}
         </Typography>
+        {showForm ? null : <Button onClick={handleForm}>Add Application</Button> }
+
+        {showForm ? <ApplicationForm colleges={colleges}/> :null}
       </CardContent>
     </CardActionArea>
   </Card> 
