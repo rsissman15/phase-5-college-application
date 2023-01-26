@@ -113,6 +113,7 @@ function LoginPage({logInUser,loggedIn}) {
             name="password"
             label="Password"
             type="password"
+            autoComplete="password"
             variant="filled"
             id="password"
             value={formData.password}

@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
     before_action :find_college
+    
 
     def index
         if params[:user_id]
@@ -16,15 +17,13 @@ class ApplicationsController < ApplicationController
         render json: application
     end
 
-
     def create
-        @application = current_user.applications.build(application_params.merge({college_id:@college.id}))
-
-        if @application.save
-          render json: @application, status: 200
-        else
-          render json: {errors: @application .errors.full_messages}, status: :unprocessable_entity
-        end
+      @application = current_user.applications.build(application_params.merge({college_id:@college.id}))
+      if  @application.save
+        render json:  @application, status: 200
+      else
+        render json: {errors: @application.errors.full_messages}, status: :unprocessable_entity
+      end
     end
     
 

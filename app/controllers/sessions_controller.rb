@@ -3,6 +3,7 @@ class SessionsController <  ApplicationController
 
     def get_current_user
         render json: current_user
+
     
         #retrieve a token adn decode that token in order to get the current user
     end

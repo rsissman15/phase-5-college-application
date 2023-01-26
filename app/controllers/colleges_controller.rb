@@ -1,15 +1,14 @@
 class CollegesController < ApplicationController
-    before_action :find_college, only: %i[ show update destroy ]
+    before_action :set_activity, only: %i[ show update destroy ]
     skip_before_action :authorized, only: [:create]
-
+  
 
     def index
        @colleges=College.all
-       render json: @colleges
+       render json: @colleges, include: [{applications:{include: [:user],except: [:user_id, :college_id]}}]
     end
 
     def show
-        binding.pry
         college=find_college
         render json: college
     end
@@ -22,7 +21,6 @@ class CollegesController < ApplicationController
 
     private
     def find_college
-     
         College.find(params[:id])
     end
 end

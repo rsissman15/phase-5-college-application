@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
   get"/get-current-user", to: "sessions#get_current_user" 
   post"/login", to: "sessions#create"
-  get '/all_colleges', to: 'colleges#get_colleges'
+  
 
-  match '*unmatched', to: 'application#not_found_method', via: :all
+
 
 end
