@@ -8,6 +8,7 @@ import SignUp from '../Authentication/SignUp';
 import { header,baseUrl,getToken } from '../Globals.js';
 import CollegeList from '../Colleges/CollegeList';
 import College from '../Colleges/College';
+import Applications from '../Applications/Applications';
 
 
 
@@ -15,6 +16,7 @@ function MainContainer() {
   const [currentUser,setCurrentUser]=useState({})
   const [loggedIn,setLoggedIn]=useState(false)
   const [colleges,setColleges]=useState([])
+  const [applications,setApplications]=useState([])
   const [start,setStart]=useState(0)
   const [search, setSearch] = useState('')
 
@@ -26,11 +28,11 @@ function MainContainer() {
 
   
   const filterColleges=colleges.filter(college => college.name.toLowerCase().includes(search.toLowerCase()))
-  const displayColleges=filterColleges.slice(start,start+15)
+  const displayColleges=filterColleges.slice(start,start+10)
   
 
   const handleMoreColleges=()=>{
-    setStart((start+15)%colleges.length)
+    setStart((start+10)%colleges.length)
   }
   
 
@@ -73,6 +75,22 @@ function MainContainer() {
       }
        
     )} 
+    if(loggedIn){
+      fetch(baseUrl+`/users/${currentUser.id}/applications`,{
+        method:'GET',
+        headers:{
+          ...header,
+          ...getToken()
+        }
+      })
+      .then(res=>res.json())
+      .then(application=>{
+        setApplications(application)
+
+
+      }
+       
+    )} 
   },[loggedIn])
 
 
@@ -99,6 +117,7 @@ function MainContainer() {
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
           <Route path='/colleges' element={<CollegeList colleges={displayColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn}/> } />
+          <Route path="/applications" element={ <Applications applications={applications} currentUser={currentUser} loggedIn={loggedIn}/> } />
         </Routes>
       </div>
     </BrowserRouter>

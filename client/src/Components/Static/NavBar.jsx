@@ -16,7 +16,7 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
     <>
        <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="">Welcome</Navbar.Brand>
+          <Navbar.Brand href="/home">College Power Planner</Navbar.Brand>
         </Container>
       </Navbar>
     </>     

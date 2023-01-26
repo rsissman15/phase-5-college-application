@@ -1,7 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import ApplicationForm from '../Applications/ApplicationForm'
-import { useParams } from 'react-router-dom'
-import { Button } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -17,7 +15,7 @@ const Colleges = ({college}) => {
     <div>
        <ul>
         {college.name}
-        <Button onClick={handleClick} color="primary">Click for More Info</Button>
+        <Button onClick={handleClick} variant="info" className="ms-3">Click for More Info</Button>
         </ul>
 
     </div>

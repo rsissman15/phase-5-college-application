@@ -1,19 +1,30 @@
 import React,{useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { header,baseUrl,getToken } from '../Globals.js';
+import Form from 'react-bootstrap/Form';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    width: 500,
+    paddingLeft:'0px',
+    paddingRight:'0px',
+    margin: "0 0px",
+  },
+  media: {
+    height: 300,
+  },
+  
+});
 
 
 
 const ApplicationForm = ({colleges}) => {
      const { id }=useParams();
+     const classes = useStyles();
 
      const navigate=useNavigate()
 
@@ -73,83 +84,108 @@ const ApplicationForm = ({colleges}) => {
       // }
     
       return (
-        
-        <div className="container">
-              <Container >
-        <Box
-          
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+      <Form className='max-w-lg mx-auto'  component="form"  noValidate sx={{ mt: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} align="center"  className={classes.root}>
             <TextField
+             className={classes.root}
               margin="normal"
               required
-              fullWidth
+              style = {{width: 600}}
               id="name"
+              variant="filled"
               label="Name"
               name="name"
               autoComplete={formData.name}
               value={formData.name}
               autoFocus
-            />
-              <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="location"
-              label="Location"
-              name="location"
-              autoComplete={formData.location}
-              value={formData.location}
-              autoFocus
-            />
-            <TextField
+              sx={{
+                input: {
+                  color: "black",
+                  background: "white"
+                }
+              }}
             
+            />
+          </Grid>
+          <Grid item xs={12} align="center">
+            <TextField
+            margin="normal"
+            required
+            style = {{width: 600}}
+            id="location"
+            variant="filled"
+            label="Location"
+            name="location"
+            autoComplete={formData.location}
+            value={formData.location}
+            autoFocus
+              sx={{
+                input: {
+                  color: "black",
+                  background: "white"
+                }
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} align="center">
+            <TextField
               margin="normal"
               required
-              fullWidth
+              style = {{width: 600}}
               name="major"
+              variant="filled"
               label="Major"
               id="Major"
               value={formData.major}
               onChange={handleChange}
               autoFocus
+              sx={{
+                input: {
+                  color: "black",
+                  background: "white"
+                }
+              }}
             />
-             <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="application_deadline"
-              type="date"
-              id="date"
-              value={formData.application_deadline}
-              onChange={handleChange}
-          />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Add Application
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/colleges" variant="body2">
-                  {"Go back"}
-                </Link>
-              </Grid>
+          </Grid>
+          <Grid item xs={12} align="center">
+            <TextField
+                margin="normal"
+                required
+                style = {{width: 600}}
+                name="application_deadline"
+                type="date"
+                id="date"
+                variant="filled"
+                label="Application Deadline"
+                value={formData.application_deadline}
+                onChange={handleChange}
+              sx={{
+                input: {
+                  color: "black",
+                  background: "white"
+                }
+              }}
+            />
+          </Grid>
+          
+              <Grid item xs={12} align="center">
+                <Button
+                type="submit"
+                variant="info" className="ms-3">
+                Submit
+              </Button>
             </Grid>
-          </Box>
-        </Box>
-      </Container>
-      </div>
+            <Grid item xs={12} align="center">
+                <Button
+                type="go back"
+                variant="info" className="ms-3"onClick={()=>navigate('/colleges') }>
+                Go Back
+              </Button>
+            </Grid>
+
+        </Grid>
+    </Form>
       )
 }
 
