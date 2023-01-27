@@ -6,6 +6,7 @@ import MoreColleges from './MoreColleges'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styled from "styled-components";
+import Pagination from '../Static/Pagination';
 
 
 const BannerContainer = styled.div`
@@ -23,7 +24,7 @@ const BannerContainer = styled.div`
 
 
 
-const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn}) => {
+const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn,collegesPerPage,totalColleges, paginate}) => {
 
 
   const displayColleges=colleges.map(college=><Colleges key={college.id} college={college}/>)
@@ -53,11 +54,13 @@ const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn}) =
             }}
           >
             {displayColleges}
+           
           </Box>
-      
-        <MoreColleges handleMoreColleges={handleMoreColleges}/>
-        
+          
+          <Pagination collegesPerPage={collegesPerPage} totalColleges={totalColleges} paginate={paginate}/>
       </BannerContainer>
+     
+      
     </>
     
   )

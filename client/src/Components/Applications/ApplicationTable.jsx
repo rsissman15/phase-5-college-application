@@ -1,14 +1,11 @@
 import React,{useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Button from 'react-bootstrap/Button';
-import TableHead from '@mui/material/TableHead';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -19,7 +16,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      backgroundColor: theme.palette.info.lightBlue,
+      backgroundColor: theme.palette.primary.white,
       color: theme.palette.primary.white,
     },
   }));
@@ -37,19 +34,7 @@ const ApplicationTable = ({application}) => {
     const classes = useStyles();
   return (
 
-        <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-          <StyledTableCell align="center">Name</StyledTableCell>
-            <StyledTableCell align="center">Location</StyledTableCell>
-            <StyledTableCell align="center">Major</StyledTableCell>
-            <StyledTableCell align="center">Application Deadline</StyledTableCell>
-            <StyledTableCell align="center"></StyledTableCell>
-
         
-          </TableRow>
-        </TableHead>
         <TableBody>
             <TableRow key={application.id}>
             <StyledTableCell align="center" component="th" scope="row">
@@ -70,8 +55,7 @@ const ApplicationTable = ({application}) => {
                 </StyledTableCell>
             </TableRow>
         </TableBody>
-        </Table>
-    </TableContainer>
+
     );
 }
 

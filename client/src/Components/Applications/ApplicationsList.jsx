@@ -1,6 +1,15 @@
 import React from 'react'
 import ApplicationTable from './ApplicationTable'
 import styled from "styled-components";
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@mui/material/TableCell';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@mui/material/Table';
+import { TableContainer } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+
+
 
 
 const BannerContainer = styled.div`
@@ -16,11 +25,37 @@ const BannerContainer = styled.div`
     backgroundSize: 'cover',
 `;
 
+
+
+const useStyles = makeStyles({
+  root: {
+    color: "white"
+  }
+});
+
+
+
+
 const ApplicationsList = ({applications}) => {
+  const classes = useStyles();
     const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application}/>)
   return (
     <BannerContainer>
-      {renderApplications}
+       <TableContainer component={Paper}/>
+       <Table className={classes.table} aria-label="simple table">
+        < TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Location</TableCell>
+            <TableCell align="center">Major</TableCell>
+            <TableCell align="center">Application Deadline</TableCell>
+            <TableCell align="center"></TableCell>
+          </TableRow>
+        </TableHead>
+        {renderApplications}
+        </Table>
+      <TableContainer/>
+     
     </BannerContainer>
 
   )

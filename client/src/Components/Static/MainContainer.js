@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from "react";
+import { useState, useEffect,useMemo } from "react";
 import Home from './Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './NavBar';
@@ -17,8 +17,10 @@ function MainContainer() {
   const [loggedIn,setLoggedIn]=useState(false)
   const [colleges,setColleges]=useState([])
   const [applications,setApplications]=useState([])
-  const [start,setStart]=useState(0)
   const [search, setSearch] = useState('')
+  const [currentPage,setCurrentPage]=useState(1)
+  const [collegesPerPage]=useState(150)
+
 
   colleges.sort(function(a, b){
     if(a.name < b.name) { return -1; }
@@ -26,14 +28,9 @@ function MainContainer() {
     return 0;
 })
 
-  
-  const filterColleges=colleges.filter(college => college.name.toLowerCase().includes(search.toLowerCase()))
-  const displayColleges=filterColleges.slice(start,start+10)
-  
 
-  const handleMoreColleges=()=>{
-    setStart((start+10)%colleges.length)
-  }
+const paginate=(pageNumber)=>setCurrentPage(pageNumber)
+
   
 
   const logInUser=(user)=>{
@@ -44,7 +41,7 @@ function MainContainer() {
 
   
   const submitApplication=(newApplication)=>{
-    console.log(newApplication)
+ 
     setApplications([...applications,newApplication])
   }
 
@@ -102,6 +99,24 @@ function MainContainer() {
     )} 
   },[loggedIn])
 
+  const collegeData = useMemo(() => {
+    let computedCollege = colleges;
+  
+    if (search) {
+      setCurrentPage(1)
+        computedCollege = computedCollege.filter(
+            college =>
+            college.name.toLowerCase().includes(search.toLowerCase())
+        );
+    }
+   
+    //Current Page slice
+    return computedCollege.slice(
+      (currentPage - 1) * collegesPerPage,
+      (currentPage - 1) * collegesPerPage + collegesPerPage
+  );
+  }, [colleges, currentPage, search]);
+
 
 
 
@@ -123,7 +138,7 @@ function MainContainer() {
           <Route path="/home" element={<Home/>}></Route>
           <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
-          <Route path='/colleges' element={<CollegeList colleges={displayColleges} handleMoreColleges={handleMoreColleges} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
+          <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
           <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn}/> } />
         </Routes>
