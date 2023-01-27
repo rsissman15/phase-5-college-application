@@ -27,6 +27,18 @@ class ApplicationsController < ApplicationController
     end
     
 
+  
+    def destroy
+      application=find_application
+      if application.user==current_user
+        application.destroy
+        head :no_content
+      else
+        render json: {errors:'You are not authorized'}, status: :unauthorized
+      end
+    end
+
+    
     private
     def find_application
         Application.find(params[:id])

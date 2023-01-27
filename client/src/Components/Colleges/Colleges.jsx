@@ -14,8 +14,9 @@ const Colleges = ({college}) => {
   return (
     <div>
        <ul>
+       <Button onClick={handleClick} variant="info" className="ms-3">Click for More Info</Button>
         {college.name}
-        <Button onClick={handleClick} variant="info" className="ms-3">Click for More Info</Button>
+        
         </ul>
 
     </div>

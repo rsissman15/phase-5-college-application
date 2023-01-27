@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
+import Error from '../../Styles.js/Error.jsx';
 
 const BannerContainer = styled.div`
     width: auto;
@@ -153,6 +153,13 @@ function LoginPage({logInUser,loggedIn}) {
         </Grid>
       </Grid>
     </Form>
+    
+           
+    {errors ?  <h1>   {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </h1>: null }
+                  
 </BannerContainer >
   );
 }

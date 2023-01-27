@@ -29,7 +29,10 @@ function MainContainer() {
 })
 
 
-const paginate=(pageNumber)=>setCurrentPage(pageNumber)
+const paginate=(pageNumber)=>{
+  setCurrentPage(pageNumber)
+  setSearch('')
+}
 
   
 
@@ -128,6 +131,17 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber)
 
   }
 
+  function handleDelete(application){
+    fetch(baseUrl+`/applications/${application.id}`,{
+      method:'DELETE',
+      headers:{
+        ...getToken()
+      }
+    })
+    .then(()=>{
+      setApplications(applications.filter(currentApplication=>currentApplication.id !== application.id))
+    })
+  }
 
 
   return (
@@ -140,7 +154,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber)
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
           <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
-          <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn}/> } />
+          <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete}/> } />
         </Routes>
       </div>
     </BrowserRouter>

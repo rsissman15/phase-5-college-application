@@ -8,6 +8,7 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Form from 'react-bootstrap/Form';
+import Error from '../../Styles.js/Error.jsx';
 
 
 const BannerContainer = styled.div`
@@ -169,7 +170,13 @@ function SignUp({loggedIn,logInUser}) {
               </Grid>
             </Grid>
           </Form>
-  
+          
+           
+          {errors ?  <h1>   {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </h1>: null }
+                  
     </BannerContainer >
     
 

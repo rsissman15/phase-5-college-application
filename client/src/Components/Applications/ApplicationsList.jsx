@@ -26,37 +26,47 @@ const BannerContainer = styled.div`
 `;
 
 
-
 const useStyles = makeStyles({
-  root: {
-    color: "white"
-  }
-});
+  table: {
+    minWidth: 650,
+    fontSize: 20,
+    color: 'blue',
+  },
+})
 
 
 
 
-const ApplicationsList = ({applications}) => {
+
+
+
+const ApplicationsList = ({applications,handleDelete}) => {
   const classes = useStyles();
-    const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application}/>)
+
+    const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} handleDelete={handleDelete}/>)
   return (
-    <BannerContainer>
-       <TableContainer component={Paper}/>
-       <Table className={classes.table} aria-label="simple table">
-        < TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell align="center">Major</TableCell>
-            <TableCell align="center">Application Deadline</TableCell>
-            <TableCell align="center"></TableCell>
-          </TableRow>
-        </TableHead>
-        {renderApplications}
-        </Table>
-      <TableContainer/>
-     
-    </BannerContainer>
+    // <BannerContainer>
+  
+    // </BannerContainer>
+    <>
+    <TableContainer component={Paper}/>
+      <Table className={classes.table} aria-label="simple table">
+      < TableHead>
+        <TableRow>
+          <TableCell align="center">Name</TableCell>
+          <TableCell align="center">Location</TableCell>
+          <TableCell align="center">Major</TableCell>
+          <TableCell align="center">Application Deadline</TableCell>
+          <TableCell align="center"></TableCell>
+        </TableRow>
+      </TableHead>
+      {renderApplications}
+      </Table>
+    <TableContainer/>
+    </>
+
+  
+
 
   )
 }

@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {header, getToken } from '../Globals'
-import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import Error from '../../Styles.js/Error';
+
 
 
 
@@ -31,6 +31,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
 
     const navigate=useNavigate()
 
+    
     
 
 
@@ -63,126 +64,140 @@ const ApplicationForm = ({colleges,submitApplication}) => {
               });
           } 
           else {
-             response.json().then((errorData) =>  setErrors(errorData.errors))
+             response.json().then((errorData) =>  {
+                setErrors(errorData.errors) 
+                console.log(errors)
+
+            })
             
           }
       })
-          //.then(resp => resp.json())
-          // .then(data => {
-          //   submitReservation(data)
-          // })
+
       }
     
       return (
         <>
-         <Typography component="h1" variant="h5" color="white">
-                Welcome Back!
-                </Typography>
-                <Form className='max-w-lg mx-auto'  component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} align="center">
-                    <TextField
-                        required
-                        id="name"
-                        label="name"
-                        name="name"
-                        variant="filled"
-                        autoComplete="name"
-                        value={formData.name}
-                        sx={{
-                        input: {
-                            color: "black",
-                            background: "white"
-                        }
-                        }}
+            <Form className='max-w-lg mx-auto'  component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} align="center">
+                <TextField
+                    required
+                    id="name"
+                    label="Name"
+                    name="name"
+                    variant="filled"
+                    autoComplete="Name"
+                    value={formData.name}
+                    sx={{
+                    input: {
+                        color: "black",
+                        background: "white",
+                        height: "35px",
+                        width:"400px",
+                    }
+                    }}
+                
+                />
+                </Grid>
+                <Grid item xs={12} align="center">
+                <TextField
+                    required
                     
-                    />
-                    </Grid>
-                    <Grid item xs={12} align="center">
-                    <TextField
-                        required
-                        
-                        name="location"
-                        label="location"
-                        autoComplete="location"
-                        variant="filled"
-                        id="location"
-                        value={formData.location}
-                        onChange={handleChange}
-                        sx={{
-                        input: {
-                            color: "black",
-                            background: "white"
-                        }
-                        }}
-                    />
-                    </Grid>
-                    <Grid item xs={12} align="center">
-                    <TextField
-                        required
-                        
-                        name="application_deadline"
-                        type="date"
-                        label="Application Deadline"
-                        autoComplete="application_deadline"
-                        variant="filled"
-                        id="location"
-                        value={formData.application_deadline}
-                        onChange={handleChange}
-                        sx={{
-                        input: {
-                            color: "black",
-                            background: "white"
-                        }
-                        }}
-                    />
-                    </Grid>
-                    <Grid item xs={12} align="center">
-                    <TextField
-                        required
-                        
-                        name="major"
-                        label="Major"
-                        autoComplete="major"
-                        variant="filled"
-                        id="major"
-                        value={formData.major}
-                        onChange={handleChange}
-                        sx={{
-                        input: {
-                            color: "black",
-                            background: "white"
-                        }
-                        }}
-                    />
-                    </Grid>
+                    name="location"
+                    label="Location"
+                    autoComplete="location"
+                    variant="filled"
+                    id="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    sx={{
+                    input: {
+                        color: "black",
+                        background: "white",
+                        height: "35px",
+                        width:"400px",
+                    }
+                    }}
+                />
+                </Grid>
+                <Grid item xs={12} align="center">
+                <TextField
+                    required
                     
-                        <Grid item xs={12} align="center">
-                        <Button
-                        type="submit"
-                        variant="info" className="ms-3"
-                    >
-                        Submit
-                    </Button>
-                        </Grid>
-
+                    name="application_deadline"
+                    type="date"
+                    label="Deadline"
+                    autoComplete="application_deadline"
+                    variant="filled"
+                    id="location"
+                    value={formData.application_deadline}
+                    onChange={handleChange}
+                    sx={{
+                    input: {
+                        color: "black",
+                        background: "white",
+                        height: "35px",
+                        width:"400px",
+                    }
+                    }}
+                />
                 </Grid>
-
-                <Grid container>
+                <Grid item xs={12} align="center">
+                <TextField
+                    required
+                    
+                    name="major"
+                    label="Major"
+                    autoComplete="major"
+                    variant="filled"
+                    id="major"
+                    value={formData.major}
+                    onChange={handleChange}
+                    sx={{
+                    input: {
+                        color: "black",
+                        background: "white",
+                        height: "35px",
+                        width:"400px",
+                    }
+                    }}
+                />
+                </Grid>
+                
                     <Grid item xs={12} align="center">
-                    <Link href="/signup" variant="body2">
-                        Don't have an account? Sign Up
-                    </Link>
+                    <Button
+                    type="submit"
+                    variant="info" className="ms-3"
+                >
+                    Submit
+                </Button>
                     </Grid>
+
+            </Grid>
+
+            <Grid container>
+                <Grid item xs={12} align="center">
+                <Link href="/signup" variant="body2">
+                    Don't have an account? Sign Up
+                </Link>
                 </Grid>
-                <Grid container >
-                    <Grid item xs={12} align="center">
-                    <Link href="/home" variant="body2">
-                        {"Go back"}
-                    </Link>
-                    </Grid>
+            </Grid>
+            <Grid container >
+                <Grid item xs={12} align="center">
+                <Link href="/home" variant="body2">
+                    {"Go back"}
+                </Link>
                 </Grid>
-                </Form>
+            </Grid>
+            </Form>
+
+           
+                {errors ?  <h1>   {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </h1>: null }
+                  
+
         </>
         
                

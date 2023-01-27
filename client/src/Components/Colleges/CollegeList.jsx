@@ -1,8 +1,7 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useEffect } from 'react';
 import SearchBar from '../Static/SearchBar'
 import Colleges from './Colleges'
-import MoreColleges from './MoreColleges'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styled from "styled-components";
@@ -41,6 +40,7 @@ const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn,col
   return (
     <>
      <SearchBar search={search} setSearch={setSearch}/>
+     <Pagination collegesPerPage={collegesPerPage} totalColleges={totalColleges} paginate={paginate}/>
    
       <BannerContainer>
      
@@ -57,7 +57,7 @@ const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn,col
            
           </Box>
           
-          <Pagination collegesPerPage={collegesPerPage} totalColleges={totalColleges} paginate={paginate}/>
+          
       </BannerContainer>
      
       
