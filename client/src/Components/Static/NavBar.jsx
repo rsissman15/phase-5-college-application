@@ -57,6 +57,9 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
             <Button variant="info" className="ms-3" href="/applications">
               My Applications
             </Button>
+            <Button variant="info" className="ms-3" href="/me">
+              My Profile
+            </Button>
             <Button variant="info" className="ms-3" href="#" onClick={handleLogout}>
               Logout
             </Button>

@@ -9,6 +9,7 @@ import { header,baseUrl,getToken } from '../Globals.js';
 import CollegeList from '../Colleges/CollegeList';
 import College from '../Colleges/College';
 import ApplicationsList from '../Applications/ApplicationsList';
+import Profile from './Profile';
 
 
 
@@ -26,6 +27,12 @@ function MainContainer() {
     if(a.name < b.name) { return -1; }
     if(a.name > b.name) { return 1; }
     return 0;
+})
+
+applications.sort(function(a, b){
+  if(a.name < b.name) { return -1; }
+  if(a.name > b.name) { return 1; }
+  return 0;
 })
 
 
@@ -143,6 +150,11 @@ const paginate=(pageNumber)=>{
     })
   }
 
+  function handleUpdateApplication(application){
+    setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, major: application.major}))
+  }
+
+
 
   return (
     <BrowserRouter>
@@ -154,7 +166,10 @@ const paginate=(pageNumber)=>{
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
           <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
-          <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete}/> } />
+          <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication}/> } />
+          <Route path='/me' element={<Profile currentUser={currentUser}/>} />
+          <Route path='*' element={<Home />} />
+         
         </Routes>
       </div>
     </BrowserRouter>

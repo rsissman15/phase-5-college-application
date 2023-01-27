@@ -40,10 +40,10 @@ const useStyles = makeStyles({
 
 
 
-const ApplicationsList = ({applications,handleDelete}) => {
+const ApplicationsList = ({applications,handleDelete,handleUpdateApplication}) => {
   const classes = useStyles();
 
-    const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} handleDelete={handleDelete}/>)
+    const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication} />)
   return (
     // <BannerContainer>
   
@@ -57,6 +57,7 @@ const ApplicationsList = ({applications,handleDelete}) => {
           <TableCell align="center">Location</TableCell>
           <TableCell align="center">Major</TableCell>
           <TableCell align="center">Application Deadline</TableCell>
+          <TableCell align="center"></TableCell>
           <TableCell align="center"></TableCell>
         </TableRow>
       </TableHead>
