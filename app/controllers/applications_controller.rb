@@ -38,6 +38,20 @@ class ApplicationsController < ApplicationController
       end
     end
 
+    def update
+
+      application=find_application
+      if application.user==current_user
+        if application.update(application_params)
+          render json: application
+        else
+          render json:{errors: application.errors.full_messages}, status: :unprocessable_entity
+        end
+      else
+        render json: {errors:'You are not authorized'}, status: :unauthorized
+      end
+    end
+
     
     private
     def find_application

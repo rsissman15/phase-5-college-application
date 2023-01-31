@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '@mui/material/Table';
 import { TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import { TableBody } from '@mui/material';
 
 
 
@@ -45,26 +46,27 @@ const ApplicationsList = ({applications,handleDelete,handleUpdateApplication}) =
 
     const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication} />)
   return (
-    // <BannerContainer>
-  
-    // </BannerContainer>
-    <>
+
+    <BannerContainer>
     <TableContainer component={Paper}/>
       <Table className={classes.table} aria-label="simple table">
       < TableHead>
         <TableRow>
-          <TableCell align="center">Name</TableCell>
-          <TableCell align="center">Location</TableCell>
-          <TableCell align="center">Major</TableCell>
-          <TableCell align="center">Application Deadline</TableCell>
-          <TableCell align="center"></TableCell>
-          <TableCell align="center"></TableCell>
+          <TableCell style={{color:'#00C5FF'}} align="center">Name</TableCell>
+          <TableCell style={{color:'#00C5FF'}} align="center">Location</TableCell>
+          <TableCell  style={{color:'#00C5FF'}} align="center">Major</TableCell>
+          <TableCell style={{color:'#00C5FF'}} align="center">Application Deadline</TableCell>
+          <TableCell style={{color:'#00C5FF'}} align="center"></TableCell>
         </TableRow>
       </TableHead>
-      {renderApplications}
+      <TableBody>
+        {renderApplications}
+
+      </TableBody>
+    
       </Table>
     <TableContainer/>
-    </>
+    </BannerContainer>
 
   
 

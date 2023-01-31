@@ -9,7 +9,7 @@ import { header,baseUrl,getToken } from '../Globals.js';
 import CollegeList from '../Colleges/CollegeList';
 import College from '../Colleges/College';
 import ApplicationsList from '../Applications/ApplicationsList';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 
 
 

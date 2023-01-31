@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Button from "react-bootstrap/esm/Button";
 import Navbar from 'react-bootstrap/Navbar';
+import Avatar from '@mui/material/Avatar';
+import Person2Icon from '@mui/icons-material/Person2';
+import SchoolIcon from '@mui/icons-material/School';
 
 
 
@@ -38,14 +41,11 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
         <Navbar bg="dark" variant="dark">
         <Container>
         <Navbar.Brand href="/">
-            <img
-                id='nav-logo'
-              alt="airspace logo"
-              src="https://i.fbcd.co/products/resized/resized-1500-1000/39b81c6d55057ae880a7ddeeb08686cedc2bf29a80142a4c77967a7dc5939ce5.webp"
-              width="100"
-              
-              className="d-inline-block align-top"
-            />
+            <Avatar sx={{ m: 12, bgcolor: '#00C5FF', align:"center"}} onClick={()=>(navigate('/home'))}>
+                <SchoolIcon />
+            </Avatar>
+       
+           
           </Navbar.Brand>
         <Navbar.Text id="current-user-name">
                 <b>{`Welcome ${currentUser.username}`}</b>
@@ -57,12 +57,14 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
             <Button variant="info" className="ms-3" href="/applications">
               My Applications
             </Button>
-            <Button variant="info" className="ms-3" href="/me">
-              My Profile
-            </Button>
             <Button variant="info" className="ms-3" href="#" onClick={handleLogout}>
               Logout
             </Button>
+            <Avatar sx={{ m: 12, bgcolor: '#00C5FF', align:"center"}} onClick={()=>(navigate('/me'))}>
+                <Person2Icon />
+            </Avatar>
+       
+            
         </Navbar.Collapse>
         </Container>
       </Navbar> 

@@ -11,40 +11,90 @@ import Error from '../../Styles.js/Error';
 
 
 
+
 const ApplicationForm = ({colleges,submitApplication}) => {
     const { id }=useParams();
     let college=colleges.find(college=>college.id.toString()===id)
 
+    const [majorType]= useState([
+        "Architecture",
+        "Arts & Museum Mgmt",
+        "Dance",
+        "Fashion & Apparel Design",
+        "Film / Broadcast",
+        "Graphic Design",
+        "Music (Instrumental)",
+        "Theatre (Drama + Musical)",
+        "Urban & Regional Planning",
+        "Web Design & Digital Media","Athletic Training",
+        "Biology",
+        "Chemistry",
+        "Food Science",
+        "Nursing (RN/BSN)",
+        "Pharmacy",
+        "Physical Ther / Kinesiology",
+        "Physicians Assistant",
+        "Pre - Dental",
+        "Pre - Medical",
+        "Pre - Veterinary Medicine","Education",
+        "English & Writing",
+        "History",
+        "Human Dev & Family Sci",
+        "Journalism",
+        "Mathematics",
+        "Non-Profit Management",
+        "Philosophy",
+        "Political Science",
+        "Psychology / Sociology",
+        "Womens Studies (+LGBT)","Aerospace Engineering",
+        "Astronomy / Physics",
+        "Aviation & Aeronautics",
+        "Biomedical Engineering",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Computer Science",
+        "Cyber Security",
+        "Electrical Engineering",
+        "Industrial Engineering",
+        "Mechanical Engineering",
+        "Accounting", 
+        "Business - General",
+        "Data Science - Analytics",
+        "Economics (Global)",
+        "Finance & Banking",
+        "Hotel & Resort Mgmt",
+        "Human Resources Mgmt",
+        "Information Systems (MIS)",
+        "Insurance & Risk Mgmt",
+        "Marketing & PR",
+        "Public Health Administration",
+        "Sport Management",
+        "Supply Chain (Logistics)","Undecided","Other"])
+    const Add = majorType.map(Add => Add)
+    const [major, setMajor] = useState('')
+    const[name]=useState(college.name)
+    const[location]=useState(college.country)
+    const[applicationDeadline,setApplicationDeadline]=useState('')
 
 
-
- 
-    const [formData,setFormData]=useState({
-        name:college.name,
-        location:college.country,
-        application_deadline:"",
-        major:""
-
+    majorType.sort(function(a, b){
+        if(a < b) { return -1; }
+        if(a> b) { return 1; }
+        return 0;
       })
+      
+      
+
+    const handlemajorTypeChange = (e) => { 
+        setMajor(majorType[e.target.value]) 
+        
+          }
 
     const [errors,setErrors]=useState('')
-
     const navigate=useNavigate()
-
-    
-    
-
-
-    const handleChange=(e)=>{
-        setFormData({
-          ...formData,
-          [e.target.name]:e.target.value
-        })
-      }
     
       function handleSubmit(e){
         e.preventDefault();
-        const updatedFormData={...formData}
         fetch(`http://localhost:3000/colleges/${college.id}/applications`, {
           method: "POST",
           headers: {
@@ -53,7 +103,13 @@ const ApplicationForm = ({colleges,submitApplication}) => {
 
 
           },
-          body: JSON.stringify(updatedFormData)
+        
+          body: JSON.stringify({
+            name: name,
+            location: location,
+            application_deadline: applicationDeadline,
+            major: major
+          }),
         })
         .then((response) => {
           if (response.ok) {
@@ -87,7 +143,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                     name="name"
                     variant="filled"
                     autoComplete="Name"
-                    value={formData.name}
+                    value={name}
                     sx={{
                     input: {
                         color: "black",
@@ -108,8 +164,8 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                     autoComplete="location"
                     variant="filled"
                     id="location"
-                    value={formData.location}
-                    onChange={handleChange}
+                    value={location}
+   
                     sx={{
                     input: {
                         color: "black",
@@ -130,8 +186,8 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                     autoComplete="application_deadline"
                     variant="filled"
                     id="location"
-                    value={formData.application_deadline}
-                    onChange={handleChange}
+                    value={applicationDeadline}
+                    onChange={(e)=>setApplicationDeadline(e.target.value)}
                     sx={{
                     input: {
                         color: "black",
@@ -143,25 +199,18 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                 />
                 </Grid>
                 <Grid item xs={12} align="center">
-                <TextField
-                    required
-                    
-                    name="major"
-                    label="Major"
-                    autoComplete="major"
-                    variant="filled"
-                    id="major"
-                    value={formData.major}
-                    onChange={handleChange}
-                    sx={{
-                    input: {
-                        color: "black",
-                        background: "white",
-                        height: "35px",
-                        width:"400px",
+                
+                 <label text-align="center" for="major" >Choose a major:</label>
+                < select
+                    onChange={e => handlemajorTypeChange(e)}
+                    className="browser-default custom-select">
+                    <option selected disabled>Select Major</option>
+                    {
+                        Add.map((address, key) => <option key={key} value={key}>{address} 
+                        </option>)
                     }
-                    }}
-                />
+                </select >
+                 
                 </Grid>
                 
                     <Grid item xs={12} align="center">
@@ -175,16 +224,9 @@ const ApplicationForm = ({colleges,submitApplication}) => {
 
             </Grid>
 
-            <Grid container>
-                <Grid item xs={12} align="center">
-                <Link href="/signup" variant="body2">
-                    Don't have an account? Sign Up
-                </Link>
-                </Grid>
-            </Grid>
             <Grid container >
                 <Grid item xs={12} align="center">
-                <Link href="/home" variant="body2">
+                <Link href="/colleges" variant="body2">
                     {"Go back"}
                 </Link>
                 </Grid>
