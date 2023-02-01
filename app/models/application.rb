@@ -1,6 +1,7 @@
 class Application < ApplicationRecord
   belongs_to :user
   belongs_to :college
+  has_one_attached :file_data
 
 
   validates_presence_of :name,:location,:application_deadline,:major
@@ -12,5 +13,9 @@ class Application < ApplicationRecord
       errors.add(:application_deadline, "can't be in the past")
     end
   end  
+
+  def file_data_url
+    Rails.application.routes.url_helpers.url_for(file_data) if file_data.attached?
+  end
 
 end

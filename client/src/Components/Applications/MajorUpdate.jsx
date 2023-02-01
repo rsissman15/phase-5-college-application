@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Error from '../../Styles.js/Error.jsx';
 
 
-const MajorUpdate = ({application, handleUpdateApplication}) => {
+const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
 
   const [majorType]= useState([
     "Architecture",
@@ -62,11 +62,20 @@ const MajorUpdate = ({application, handleUpdateApplication}) => {
     "Sport Management",
     "Supply Chain (Logistics)","Undecided","Other"])
     const Add = majorType.map(Add => Add)
+
+  
+    
   
     const [major,setMajor]=useState("")
 
     const navigate=useNavigate();
     const [errors, setErrors] = useState([]);
+
+    majorType.sort(function(a, b){
+      if(a < b) { return -1; }
+      if(a> b) { return 1; }
+      return 0;
+    })
 
 
 
@@ -91,8 +100,11 @@ const MajorUpdate = ({application, handleUpdateApplication}) => {
       if (response.ok) {
           response.json().then((data) =>{
             handleUpdateApplication(data)
-            navigate('/colleges')
+            navigate('/applications')
             alert("Your major has been updated")
+           setShowForm(false)
+            
+
 
           });
       } 

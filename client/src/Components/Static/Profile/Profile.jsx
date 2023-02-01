@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import EditIcon from '@mui/icons-material/Edit';
-import PasswordUpdate from './PasswordUpdate';
+import PasswordUpate from './PasswordUpdate';
 
 
 
 
 
-const Profile = ({currentUser}) => {
+const Profile = ({currentUser,handleUpdatePassword}) => {
 
   const [form,setForm]=useState(false)
 
@@ -47,12 +47,13 @@ const Profile = ({currentUser}) => {
                       <MDBCol size="6" className="mb-3">
                         
                        
-                        {form ? <PasswordUpdate/> :
+                        {/* {form ? <PasswordUpate handleUpdatePassword={handleUpdatePassword} currentUser={currentUser}/> :  */}
                          <MDBTypography tag="h6">
                           <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3" onClick={handleClick}></EditIcon>
                           Password
                           </MDBTypography>
-                        }
+                        
+                        
                         <MDBCardText className="text-muted"></MDBCardText>
                       </MDBCol>
                     </MDBRow>

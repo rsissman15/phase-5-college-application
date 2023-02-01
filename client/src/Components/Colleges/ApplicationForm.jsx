@@ -75,6 +75,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
     const[name]=useState(college.name)
     const[location]=useState(college.country)
     const[applicationDeadline,setApplicationDeadline]=useState('')
+    const [fileData,setFileData]=useState(null)
 
 
     majorType.sort(function(a, b){
@@ -95,21 +96,21 @@ const ApplicationForm = ({colleges,submitApplication}) => {
     
       function handleSubmit(e){
         e.preventDefault();
+        const formData= new FormData()
+        formData.append('name',name)
+        formData.append('location',location)
+        formData.append('major',major)
+        formData.append('application_deadline',applicationDeadline)
+        formData.append('file_data',fileData)
+
         fetch(`http://localhost:3000/colleges/${college.id}/applications`, {
           method: "POST",
           headers: {
-            ...header,
-            ...getToken()
-
-
-          },
+                    ...getToken()
         
-          body: JSON.stringify({
-            name: name,
-            location: location,
-            application_deadline: applicationDeadline,
-            major: major
-          }),
+        
+                  },
+          body:formData 
         })
         .then((response) => {
           if (response.ok) {
@@ -130,6 +131,44 @@ const ApplicationForm = ({colleges,submitApplication}) => {
       })
 
       }
+    //   function handleSubmit(e){
+    //     e.preventDefault();
+
+    //     fetch(`http://localhost:3000/colleges/${college.id}/applications`, {
+    //       method: "POST",
+    //       headers: {
+    //         ...header,
+    //         ...getToken()
+
+
+    //       },
+        
+    //       body: JSON.stringify({
+    //         name: name,
+    //         location: location,
+    //         application_deadline: applicationDeadline,
+    //         major: major
+    //       }),
+    //     })
+    //     .then((response) => {
+    //       if (response.ok) {
+    //           response.json().then((data) =>{
+    //             submitApplication(data)
+    //             navigate('/applications') 
+
+    //           });
+    //       } 
+    //       else {
+    //          response.json().then((errorData) =>  {
+    //             setErrors(errorData.errors) 
+    //             console.log(errors)
+
+    //         })
+            
+    //       }
+    //   })
+
+    //   }
     
       return (
         <>
@@ -199,8 +238,6 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                 />
                 </Grid>
                 <Grid item xs={12} align="center">
-                
-                 <label text-align="center" for="major" >Choose a major:</label>
                 < select
                     onChange={e => handlemajorTypeChange(e)}
                     className="browser-default custom-select">
@@ -211,6 +248,11 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                     }
                 </select >
                  
+                </Grid>
+                <Grid item xs={12} align="center">
+                   
+                    <input type='file' name='file' onChange={e=>setFileData(e.target.files[0])}></input>
+                    
                 </Grid>
                 
                     <Grid item xs={12} align="center">

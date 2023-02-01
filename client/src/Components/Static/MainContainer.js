@@ -154,6 +154,14 @@ const paginate=(pageNumber)=>{
     setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, major: application.major}))
   }
 
+  function handleUpdatePassword(password){
+    console.log(password)
+    //setCurrentUser(currentUser.map((oldPassword)=>oldPassword.id !== password.id ? oldPassword: {...oldPassword, password: password}))
+  }
+
+
+
+
 
 
   return (
@@ -167,7 +175,7 @@ const paginate=(pageNumber)=>{
           <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
           <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication}/> } />
-          <Route path='/me' element={<Profile currentUser={currentUser}/>} />
+          <Route path='/me' element={<Profile currentUser={currentUser} handleUpdatePassword={handleUpdatePassword}/>} />
           <Route path='*' element={<Home />} />
          
         </Routes>

@@ -36,13 +36,16 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
                 {application.major}
-                { showForm ? <MajorUpdate handleUpdateApplication={handleUpdateApplication} application={application}/> : 
+                { showForm ? <MajorUpdate handleUpdateApplication={handleUpdateApplication} application={application} setShowForm={setShowForm}/> : 
                   <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3" onClick={handleForm}>Update Major</EditIcon>
                    }     
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
                 {application.application_deadline}
                 </TableCell>
+                {/* <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
+                {application.file_data}
+                </TableCell> */}
                 <TableCell>
                 <Button  type="submit" variant="info" className="ms-3" onClick={()=>(handleDelete(application))}>Delete</Button>
                 </TableCell>

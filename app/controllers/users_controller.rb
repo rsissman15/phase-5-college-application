@@ -23,6 +23,19 @@ class UsersController < ApplicationController
         render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
         
     end
+
+
+    def update
+        # if @user==current_user
+          if current_user.update(user_params)
+            render json: current_user
+          else
+            render json:{errors: application.errors.full_messages}, status: :unprocessable_entity
+          end
+        else
+          render json: {errors:'You are not authorized'}, status: :unauthorized
+        end
+    end
   
     private
     def set_user
@@ -31,4 +44,5 @@ class UsersController < ApplicationController
     def user_params
         params.permit(:email, :password, :username)
     end
+ 
 end

@@ -1,6 +1,5 @@
 class ApplicationsController < ApplicationController
     before_action :find_college
-    
 
     def index
         if params[:user_id]
@@ -39,7 +38,6 @@ class ApplicationsController < ApplicationController
     end
 
     def update
-
       application=find_application
       if application.user==current_user
         if application.update(application_params)
@@ -63,6 +61,6 @@ class ApplicationsController < ApplicationController
     end
 
     def application_params
-        params.permit(:name,:location,:major,:application_deadline)
+        params.permit(:name,:location,:major,:application_deadline,:file_data)
     end
 end
