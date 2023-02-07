@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import MajorUpdate from './MajorUpdate';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
-import ApplicationForm from '../Colleges/ApplicationForm';
+
 
 
 

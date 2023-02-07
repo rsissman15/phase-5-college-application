@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import {header, getToken } from '../Globals'
+import { getToken } from '../Globals'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Grid from '@mui/material/Grid';

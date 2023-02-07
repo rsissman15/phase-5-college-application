@@ -5,13 +5,13 @@ class ApplicationController < ActionController::API
       render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
     end
    
-    # def encode_token(payload)
-    #   JWT.encode(payload, "put your secret password here")
-    # end
-
     def encode_token(payload)
-      JWT.encode(payload,ENV['JWT_SECRET'])
+      JWT.encode(payload, "put your secret password here")
     end
+
+    # def encode_token(payload)
+    #   JWT.encode(payload,ENV['JWT_SECRET'])
+    # end
     
     # Helper function to check a request if there is an Authorization header
     def auth_header
@@ -22,8 +22,8 @@ class ApplicationController < ActionController::API
       if auth_header
         token = auth_header.split(' ')[1]
         begin
-          JWT.decode(token,ENV['JWT_SECRET'],true,algorithm:ENV['JWT_ALGORITHM'])
-          #JWT.decode(token, "put your secret password here", true, algorithm: 'HS256')
+          #JWT.decode(token,ENV['JWT_SECRET'],true,algorithm:ENV['JWT_ALGORITHM'])
+          JWT.decode(token, "put your secret password here", true, algorithm: 'HS256')
         rescue JWT::DecodeError
           nil
         end
