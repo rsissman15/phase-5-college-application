@@ -23,6 +23,7 @@ class ApplicationsController < ApplicationController
       else
         render json: {errors: @application.errors.full_messages}, status: :unprocessable_entity
       end
+   
     end
     
 
@@ -61,6 +62,10 @@ class ApplicationsController < ApplicationController
     end
 
     def application_params
-        params.permit(:name,:location,:major,:application_deadline,:file_data)
-    end
+      params.permit(:name,:location,:major,:application_deadline,:file_data)
+     end
+
+
+ 
+
 end

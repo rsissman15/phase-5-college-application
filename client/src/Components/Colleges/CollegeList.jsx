@@ -23,7 +23,7 @@ const BannerContainer = styled.div`
 
 
 
-const CollegeList = ({colleges, handleMoreColleges,search,setSearch,loggedIn,collegesPerPage,totalColleges, paginate}) => {
+const CollegeList = ({colleges,search,setSearch,loggedIn,collegesPerPage,totalColleges, paginate}) => {
 
 
   const displayColleges=colleges.map(college=><Colleges key={college.id} college={college}/>)

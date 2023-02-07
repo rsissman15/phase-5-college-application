@@ -78,6 +78,8 @@ const ApplicationForm = ({colleges,submitApplication}) => {
     const [fileData,setFileData]=useState(null)
 
 
+
+
     majorType.sort(function(a, b){
         if(a < b) { return -1; }
         if(a> b) { return 1; }
@@ -103,6 +105,8 @@ const ApplicationForm = ({colleges,submitApplication}) => {
         formData.append('application_deadline',applicationDeadline)
         formData.append('file_data',fileData)
 
+
+    
         fetch(`http://localhost:3000/colleges/${college.id}/applications`, {
           method: "POST",
           headers: {
@@ -123,7 +127,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
           else {
              response.json().then((errorData) =>  {
                 setErrors(errorData.errors) 
-                console.log(errors)
+               
 
             })
             
@@ -211,10 +215,9 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                  
                 </Grid>
                 <Grid item xs={12} align="center">
-                   
-                    <input align="center" style={{color:'#00C5FF'}} type='file' name='file' onChange={e=>setFileData(e.target.files[0])} ></input>
-                    
+                    <input align="center" style={{color:'#00C5FF'}} type='file' name='file' multiple onChange={e=>setFileData(e.target.files[0])} ></input>
                 </Grid>
+               
                 
                     <Grid item xs={12} align="center">
                     <Button

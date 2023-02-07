@@ -11,6 +11,8 @@ class Application < ApplicationRecord
   validate :application_deadline_date_cannot_be_in_the_past
 
 
+
+
   def application_deadline_date_cannot_be_in_the_past
     if application_deadline.present? && application_deadline < Date.today
       errors.add(:application_deadline, "can't be in the past")

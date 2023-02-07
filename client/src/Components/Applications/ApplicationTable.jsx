@@ -34,6 +34,8 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
         }
     }
 
+
+
    
 
 
@@ -62,7 +64,6 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
                 {application.application_deadline}
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
-                    
                     <Button endIcon={<FolderIcon />} variant="info" className="ms-3" href={file_data_url()} type="submit">Download Files</Button>
                 </TableCell>
                 <TableCell>
