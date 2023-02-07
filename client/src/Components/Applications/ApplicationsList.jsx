@@ -57,6 +57,7 @@ const ApplicationsList = ({applications,handleDelete,handleUpdateApplication}) =
           <TableCell  style={{color:'#00C5FF'}} align="center">Major</TableCell>
           <TableCell style={{color:'#00C5FF'}} align="center">Application Deadline</TableCell>
           <TableCell style={{color:'#00C5FF'}} align="center"></TableCell>
+          <TableCell style={{color:'#00C5FF'}} align="center"></TableCell>
         </TableRow>
       </TableHead>
       <TableBody>

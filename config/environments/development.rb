@@ -53,9 +53,10 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  Rails.application.routes.default_url_options = {
-  host: 'http://localhost:3000'
-}
+#   Rails.application.routes.default_url_options = {
+#   host: 'http://localhost:4000'
+# }
+
 
 
   # Raises error for missing translations.

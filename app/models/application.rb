@@ -1,12 +1,15 @@
 class Application < ApplicationRecord
   belongs_to :user
   belongs_to :college
-  has_one_attached :file_data
+  has_one_attached :file_data, dependent: :destroy
+
+
 
 
   validates_presence_of :name,:location,:application_deadline,:major
   validates :name, uniqueness: { scope: :user_id, message:":You already have an application for this school"}
   validate :application_deadline_date_cannot_be_in_the_past
+
 
   def application_deadline_date_cannot_be_in_the_past
     if application_deadline.present? && application_deadline < Date.today
@@ -14,8 +17,6 @@ class Application < ApplicationRecord
     end
   end  
 
-  def file_data_url
-    Rails.application.routes.url_helpers.url_for(file_data) if file_data.attached?
-  end
+
 
 end

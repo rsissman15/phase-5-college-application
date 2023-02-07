@@ -21,8 +21,34 @@ const BannerContainer = styled.div`
 
 
 
-function Home() {
+function Home({loggedIn}) {
     const navigate=useNavigate();
+
+
+    const logInHome=()=>{
+        return(
+            <div> 
+            <h1 style={{ color: "White", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>Welcome to College Power Planner</h1>
+            </div>
+
+        )
+       
+      
+
+    }
+
+    const logOutHome=()=>{
+        return(
+            <div>
+                <h1 style={{ color: "White", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>Welcome to College Power Planner</h1>
+                <h2 style={{ color: "White", fontSize: "35px", textAlign: "center", textShadow: "2px 2px black" }}>To help you stay organized during your college application process!</h2>
+                <Button variant="info" className="ms-3" size="lg" onClick={()=>navigate(`/login`)}>Login</Button>
+                <Button variant="info" className="ms-3" size="lg" onClick={()=>navigate(`/signup`)}>Signup</Button>
+            </div>
+
+        )
+       
+    }
     
 
 
@@ -32,10 +58,8 @@ function Home() {
         <div className="d-grid gap-2">
             
             <BannerContainer >
-                <h1 style={{ color: "White", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>Welcome to College Power Planner</h1>
-                <h2 style={{ color: "White", fontSize: "35px", textAlign: "center", textShadow: "2px 2px black" }}>To help you stay organized during your college application process!</h2>
-                <Button variant="info" className="ms-3" size="lg" onClick={()=>navigate(`/login`)}>Login</Button>
-                <Button variant="info" className="ms-3" size="lg" onClick={()=>navigate(`/signup`)}>Signup</Button>
+                {loggedIn ? logInHome(): logOutHome()}
+               
             </BannerContainer>
            
         </div>

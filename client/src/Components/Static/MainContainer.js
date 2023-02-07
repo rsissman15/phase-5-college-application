@@ -169,14 +169,14 @@ const paginate=(pageNumber)=>{
       <div className="App">
         <Navbar loggedIn={loggedIn} currentUser={currentUser} logoutUser={logoutUser}/>
         <Routes>
-          <Route path="/home" element={<Home/>}></Route>
+          <Route path="/home" element={<Home loggedIn={loggedIn}/>}></Route>
           <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>
           <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
           <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
           <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication}/> } />
           <Route path='/me' element={<Profile currentUser={currentUser} handleUpdatePassword={handleUpdatePassword}/>} />
-          <Route path='*' element={<Home />} />
+          <Route path='*' element={<Home  loggedIn={loggedIn} />} />
          
         </Routes>
       </div>

@@ -25,17 +25,17 @@ class UsersController < ApplicationController
     end
 
 
-    def update
-        # if @user==current_user
-          if current_user.update(user_params)
-            render json: current_user
-          else
-            render json:{errors: application.errors.full_messages}, status: :unprocessable_entity
-          end
-        else
-          render json: {errors:'You are not authorized'}, status: :unauthorized
-        end
-    end
+    # def update
+    #     # if @user==current_user
+    #       if current_user.update(user_params)
+    #         render json: current_user
+    #       else
+    #         render json:{errors: application.errors.full_messages}, status: :unprocessable_entity
+    #       end
+    #     else
+    #       render json: {errors:'You are not authorized'}, status: :unauthorized
+    #     end
+    # end
   
     private
     def set_user

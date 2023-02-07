@@ -131,48 +131,9 @@ const ApplicationForm = ({colleges,submitApplication}) => {
       })
 
       }
-    //   function handleSubmit(e){
-    //     e.preventDefault();
-
-    //     fetch(`http://localhost:3000/colleges/${college.id}/applications`, {
-    //       method: "POST",
-    //       headers: {
-    //         ...header,
-    //         ...getToken()
-
-
-    //       },
-        
-    //       body: JSON.stringify({
-    //         name: name,
-    //         location: location,
-    //         application_deadline: applicationDeadline,
-    //         major: major
-    //       }),
-    //     })
-    //     .then((response) => {
-    //       if (response.ok) {
-    //           response.json().then((data) =>{
-    //             submitApplication(data)
-    //             navigate('/applications') 
-
-    //           });
-    //       } 
-    //       else {
-    //          response.json().then((errorData) =>  {
-    //             setErrors(errorData.errors) 
-    //             console.log(errors)
-
-    //         })
-            
-    //       }
-    //   })
-
-    //   }
-    
       return (
         <>
-            <Form className='max-w-lg mx-auto'  component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+            <Form className='max-w-lg mx-auto' encType="multipart:true" component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
                 <Grid item xs={12} align="center">
                 <TextField
@@ -251,7 +212,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                 </Grid>
                 <Grid item xs={12} align="center">
                    
-                    <input type='file' name='file' onChange={e=>setFileData(e.target.files[0])}></input>
+                    <input align="center" style={{color:'#00C5FF'}} type='file' name='file' onChange={e=>setFileData(e.target.files[0])} ></input>
                     
                 </Grid>
                 
