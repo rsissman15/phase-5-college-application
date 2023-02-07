@@ -83,6 +83,10 @@ GEM
     date (3.3.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -185,6 +189,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.13)
   bcrypt (~> 3.1.7)
   bootsnap
+  dotenv-rails
   jwt
   pg (~> 1.1)
   pry
