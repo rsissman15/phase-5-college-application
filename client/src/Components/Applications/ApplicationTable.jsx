@@ -34,12 +34,18 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
         }
     }
 
-
-
-   
-
-
-
+    const application_file_attached=()=>{
+        if (application.file_data==null){
+            return(
+                <Button endIcon={<FolderIcon />}  disabled type="submit">Download Files</Button>
+            )
+        }
+        else{
+            return(
+                <Button endIcon={<FolderIcon />} variant="info" className="ms-3" href={file_data_url()} type="submit">Download Files</Button>
+            )
+        }
+    }
 
 
 
@@ -64,7 +70,7 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
                 {application.application_deadline}
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
-                    <Button endIcon={<FolderIcon />} variant="info" className="ms-3" href={file_data_url()} type="submit">Download Files</Button>
+                    {application_file_attached()}
                 </TableCell>
                 <TableCell>
                 <Button  style={{color:'#00C5FF'}} variant="info" className="ms-3" onClick={()=>(handleDelete(application))}>Delete</Button>

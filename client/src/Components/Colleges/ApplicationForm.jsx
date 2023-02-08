@@ -103,7 +103,10 @@ const ApplicationForm = ({colleges,submitApplication}) => {
         formData.append('location',location)
         formData.append('major',major)
         formData.append('application_deadline',applicationDeadline)
-        formData.append('file_data',fileData)
+        if(fileData){
+            formData.append('file_data',fileData)
+        }
+         
 
 
     
