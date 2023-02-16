@@ -14,12 +14,12 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
  
   const navigate=useNavigate();
 
+
   const logOutLinks=()=>{
     return (
     <>
        <Navbar bg="dark" variant="dark">
         <Container>
-    
           <Navbar.Brand href="/home">College Power Planner</Navbar.Brand>
         </Container>
       </Navbar>
@@ -43,9 +43,7 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
         <Navbar.Brand href="/">
             <Avatar sx={{ m: 12, bgcolor: '#00C5FF', align:"center"}} onClick={()=>(navigate('/home'))}>
                 <SchoolIcon />
-            </Avatar>
-       
-           
+            </Avatar>         
           </Navbar.Brand>
         <Navbar.Text id="current-user-name">
                 <b>{`Welcome ${currentUser.username}`}</b>

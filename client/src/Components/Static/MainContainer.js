@@ -13,8 +13,9 @@ import Profile from './Profile/Profile';
 
 
 
+
 function MainContainer() {
-  const [currentUser,setCurrentUser]=useState({})
+  const [currentUser,setCurrentUser]=useState(null)
   const [loggedIn,setLoggedIn]=useState(false)
   const [colleges,setColleges]=useState([])
   const [applications,setApplications]=useState([])
@@ -44,20 +45,17 @@ const paginate=(pageNumber)=>{
   
 
   const logInUser=(user)=>{
-    setCurrentUser(user)
-    setLoggedIn(true)
+    
+      setCurrentUser(user)
+      setLoggedIn(true)
+    
+    
   }
 
-
-  
   const submitApplication=(newApplication)=>{
  
     setApplications([...applications,newApplication])
   }
-
-
-
-
 
   useEffect(()=>{
     const token=localStorage.getItem('jwt')
@@ -132,8 +130,9 @@ const paginate=(pageNumber)=>{
 
 
   const logoutUser=()=>{
-    setCurrentUser({})
+    setCurrentUser(null)
     setLoggedIn(false)
+    setColleges([])
     localStorage.removeItem('jwt')
 
   }
@@ -154,10 +153,7 @@ const paginate=(pageNumber)=>{
     setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, major: application.major}))
   }
 
-  function handleUpdatePassword(password){
-    console.log(password)
-    //setCurrentUser(currentUser.map((oldPassword)=>oldPassword.id !== password.id ? oldPassword: {...oldPassword, password: password}))
-  }
+ 
 
 
 
@@ -175,7 +171,7 @@ const paginate=(pageNumber)=>{
           <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
           <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
           <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication}/> } />
-          <Route path='/me' element={<Profile currentUser={currentUser} handleUpdatePassword={handleUpdatePassword}/>} />
+          <Route path='/me' element={<Profile currentUser={currentUser} loggedIn={loggedIn}/>}/>
           <Route path='*' element={<Home  loggedIn={loggedIn} />} />
          
         </Routes>

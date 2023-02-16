@@ -7,17 +7,16 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 
-const Profile = ({currentUser,handleUpdatePassword}) => {
+const Profile = ({currentUser,loggedIn}) => {
 
   //const [form,setForm]=useState(false)
 
   // const handleClick=()=>{
   //   setForm(click=>!click)
   // }
-
-  
-  return (
-     <section className="vh-100" style={{ background:"linear-gradient(109.6deg, rgba(0, 0, 0, 0.93) 11.2%, rgb(63, 61, 61) 78.9%)" }}>
+  const profile=()=>{
+    return(
+      <section className="vh-100" style={{ background:"linear-gradient(109.6deg, rgba(0, 0, 0, 0.93) 11.2%, rgb(63, 61, 61) 78.9%)" }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="6" className="mb-4 mb-lg-0">
@@ -45,15 +44,11 @@ const Profile = ({currentUser,handleUpdatePassword}) => {
                         <MDBCardText className="text-muted">{currentUser.username}</MDBCardText>
                       </MDBCol>
                       <MDBCol size="6" className="mb-3">
-                        
-                       
                         {/* {form ? <PasswordUpate handleUpdatePassword={handleUpdatePassword} currentUser={currentUser}/> :  */}
                          <MDBTypography tag="h6">
                           <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3"></EditIcon>
                           Password
                           </MDBTypography>
-                        
-                        
                         <MDBCardText className="text-muted"></MDBCardText>
                       </MDBCol>
                     </MDBRow>
@@ -70,6 +65,16 @@ const Profile = ({currentUser,handleUpdatePassword}) => {
         </MDBRow>
       </MDBContainer>
     </section>
+    )
+  }
+
+  
+  return (
+    <div>
+         {loggedIn ? profile() : null}
+    </div>
+   
+     
   )
 }
 

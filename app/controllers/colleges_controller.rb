@@ -1,7 +1,5 @@
 class CollegesController < ApplicationController
-    before_action :set_activity, only: %i[ show update destroy ]
-    skip_before_action :authorized, only: [:create]
-  
+    
 
     def index
        @colleges=College.all

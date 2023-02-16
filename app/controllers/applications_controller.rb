@@ -1,5 +1,7 @@
 class ApplicationsController < ApplicationController
     before_action :find_college
+    
+    
 
     def index
         if params[:user_id]
@@ -17,7 +19,6 @@ class ApplicationsController < ApplicationController
     end
 
     def create
-
       @application = current_user.applications.build(application_params.merge({college_id:@college.id}))
       if  @application.save
         render json:  @application, status: 200

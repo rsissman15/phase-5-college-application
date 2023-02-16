@@ -1,4 +1,25 @@
 class ApplicationController < ActionController::API
+
+  include ActionController::Cookies
+  
+
+#   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+  
+#   before_action :authorize
+#   private
+
+#   def authorize
+    
+#     @current_user = User.find_by(id: session[:user_id])
+   
+#     render json: { errors: ["not authorized"] }, status: :unauthorized unless @current_user
+#   end
+
+#   def render_unprocessable_entity_response(exception)
+#     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+#   end
+# end
+
     before_action :authorized
     
     def not_found_method
@@ -9,11 +30,7 @@ class ApplicationController < ActionController::API
       JWT.encode(payload, "put your secret password here")
     end
 
-    # def encode_token(payload)
-    #   JWT.encode(payload,ENV['JWT_SECRET'])
-    # end
-    
-    # Helper function to check a request if there is an Authorization header
+ 
     def auth_header
       request.headers['Authorization']
     end
@@ -22,7 +39,6 @@ class ApplicationController < ActionController::API
       if auth_header
         token = auth_header.split(' ')[1]
         begin
-          #JWT.decode(token,ENV['JWT_SECRET'],true,algorithm:ENV['JWT_ALGORITHM'])
           JWT.decode(token, "put your secret password here", true, algorithm: 'HS256')
         rescue JWT::DecodeError
           nil
@@ -30,23 +46,20 @@ class ApplicationController < ActionController::API
       end
     end
 
-    # Used to find the current user if their token passes it's authentication
+    
     def current_user
       if decoded_token
-        # Using the decoded token, grab the user_id stored within it and find a user
         user_id = decoded_token[0]['user_id']
         @user = User.find_by(id: user_id)
       end
     end
 
-    # Check if a user is logged in through a series of chained methods
+   
     def logged_in?
       !!current_user
     end
 
-    # If a user is NOT logged in, it sends the message "Please log in"
     def authorized
-
       render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
   end

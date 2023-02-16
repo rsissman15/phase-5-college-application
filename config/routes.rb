@@ -14,8 +14,11 @@ Rails.application.routes.draw do
 
   get"/get-current-user", to: "sessions#get_current_user" 
   post"/login", to: "sessions#create"
-
   get "/me", to: "users#show"
+  delete "/logout", to: "sessions#destroy"
+  
+
+
 
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

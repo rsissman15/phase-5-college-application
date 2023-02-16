@@ -105,6 +105,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
         formData.append('application_deadline',applicationDeadline)
         if(fileData){
             formData.append('file_data',fileData)
+
         }
          
 

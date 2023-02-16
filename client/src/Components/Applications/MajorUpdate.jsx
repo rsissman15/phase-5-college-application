@@ -89,7 +89,7 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
 
    function handleSubmit(e){
     e.preventDefault()
-    fetch (baseUrl+`/applications/${application.id}`,{
+    fetch(baseUrl+`/applications/${application.id}`,{
         method:'PATCH',
         headers:{
             ...header,
