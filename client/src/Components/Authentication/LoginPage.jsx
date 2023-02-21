@@ -58,7 +58,7 @@ function LoginPage({logInUser,loggedIn}) {
             method:'POST',
             headers: {
               ...header,
-              ...getToken()
+              //...getToken()
             },
             body:JSON.stringify(formData)
         })
@@ -66,8 +66,8 @@ function LoginPage({logInUser,loggedIn}) {
             .then((response) => {
               if (response.ok) {
                   response.json().then((data) =>{
-                    logInUser(data.user)
-                    localStorage.setItem('jwt', data.token)
+                    logInUser(data)
+                    //localStorage.setItem('jwt', data.token)
                     navigate('/colleges')  
                   });
               } 

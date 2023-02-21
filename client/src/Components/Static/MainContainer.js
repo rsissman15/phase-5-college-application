@@ -49,7 +49,6 @@ const paginate=(pageNumber)=>{
       setCurrentUser(user)
       setLoggedIn(true)
     
-    
   }
 
   const submitApplication=(newApplication)=>{
@@ -57,28 +56,46 @@ const paginate=(pageNumber)=>{
     setApplications([...applications,newApplication])
   }
 
+
+  useEffect(() => {
+      fetch("/get-current-user", {
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((user) => {
+            logInUser(user)
+          });
+        } 
+      });
+    
+    
+   
+  }, []);
+
+
   useEffect(()=>{
-    const token=localStorage.getItem('jwt')
-    if(token && !loggedIn){
-      fetch(baseUrl+'/get-current-user',{
-        method:'GET',
-        headers:{
-          ...header,
-          ...getToken()
-        }
-      })
-      .then(res=>res.json())
-      .then(user=>{
-        logInUser(user)
-      }
+    //const token=localStorage.getItem('jwt')
+    //if(token && !loggedIn){
+ 
+    //   fetch(baseUrl+'/get-current-user',{
+    //     method:'GET',
+    //     headers:{
+    //       ...header,
+    //       //...getToken()
+    //     }
+    //   })
+    //   .then(res=>res.json())
+    //   .then(user=>{
+    //     logInUser(user)
+    //   }
         
-    )} 
+    // )} 
     if(loggedIn){
-      fetch(baseUrl+'/colleges',{
+      fetch('/colleges',{
         method:'GET',
+
         headers:{
           ...header,
-          ...getToken()
+          //...getToken()
         }
       })
       .then(res=>res.json())
@@ -90,11 +107,12 @@ const paginate=(pageNumber)=>{
        
     )} 
     if(loggedIn){
-      fetch(baseUrl+`/users/${currentUser.id}/applications`,{
+      fetch(`/users/${currentUser.id}/applications`,{
         method:'GET',
+        credentials: 'same-origin',
         headers:{
           ...header,
-          ...getToken()
+          //...getToken()
         }
       })
       .then(res=>res.json())
@@ -133,7 +151,8 @@ const paginate=(pageNumber)=>{
     setCurrentUser(null)
     setLoggedIn(false)
     setColleges([])
-    localStorage.removeItem('jwt')
+    setApplications([])
+    //localStorage.removeItem('jwt')
 
   }
 
@@ -141,7 +160,7 @@ const paginate=(pageNumber)=>{
     fetch(baseUrl+`/applications/${application.id}`,{
       method:'DELETE',
       headers:{
-        ...getToken()
+        //...getToken()
       }
     })
     .then(()=>{
@@ -154,10 +173,6 @@ const paginate=(pageNumber)=>{
   }
 
  
-
-
-
-
 
 
   return (

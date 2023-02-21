@@ -1,9 +1,9 @@
 class ApplicationsController < ApplicationController
     before_action :find_college
+    skip_before_action :authenticate, only: [:index,:show]
     
-    
-
     def index
+      debugger
         if params[:user_id]
           user = User.find(params[:user_id])
           applications = user.applications

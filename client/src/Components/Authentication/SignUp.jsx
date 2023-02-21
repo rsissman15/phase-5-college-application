@@ -57,7 +57,7 @@ function SignUp({loggedIn,logInUser}) {
           method:'POST',
           headers: {
               ...header,
-              ...getToken()
+              //...getToken()
             },
           body:JSON.stringify(formData)
       })
@@ -65,7 +65,7 @@ function SignUp({loggedIn,logInUser}) {
               if (response.ok) {
                   response.json().then((data) =>{
                       logInUser(data.user)
-                      localStorage.setItem('jwt', data.token)
+                      //localStorage.setItem('jwt', data.token)
                       navigate('/colleges')
                   });
               } 

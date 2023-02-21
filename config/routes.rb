@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
 
-  get"/get-current-user", to: "sessions#get_current_user" 
+  get"/get-current-user", to: "users#get_current_user" 
   post"/login", to: "sessions#create"
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
