@@ -89,11 +89,10 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
 
    function handleSubmit(e){
     e.preventDefault()
-    fetch(baseUrl+`/applications/${application.id}`,{
+    fetch(`/applications/${application.id}`,{
         method:'PATCH',
         headers:{
-            ...header,
-            ...getToken()
+            ...header
         },
         body:JSON.stringify({major: major})
     }) .then((response) => {

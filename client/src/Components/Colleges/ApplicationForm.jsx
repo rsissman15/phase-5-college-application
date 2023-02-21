@@ -111,13 +111,8 @@ const ApplicationForm = ({colleges,submitApplication}) => {
 
 
     
-        fetch(`http://localhost:3000/colleges/${college.id}/applications`, {
+        fetch(`/colleges/${college.id}/applications`, {
           method: "POST",
-          headers: {
-                    ...getToken()
-        
-        
-                  },
           body:formData 
         })
         .then((response) => {

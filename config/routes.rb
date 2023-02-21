@@ -1,4 +1,3 @@
-# config/routes.rb
 Rails.application.routes.draw do
 
   resources :applications, only: [:index,:destroy,:update]
@@ -22,9 +21,6 @@ Rails.application.routes.draw do
 
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
-
-  
-
 
 
 end

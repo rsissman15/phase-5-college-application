@@ -1,7 +1,6 @@
 class CollegesController < ApplicationController
-    skip_before_action :authenticate, only: [:index,:show]
+    #skip_before_action :authenticate, only: [:index,:show]
     
-
     def index
        @colleges=College.all
        render json: @colleges, include: [{applications:{include: [:user],except: [:user_id, :college_id]}}]

@@ -54,11 +54,11 @@ function LoginPage({logInUser,loggedIn}) {
         
         e.preventDefault();
         
-        fetch(baseUrl+'/login',{
+        fetch('/login',{
             method:'POST',
             headers: {
               ...header,
-              //...getToken()
+             // ...getToken()
             },
             body:JSON.stringify(formData)
         })

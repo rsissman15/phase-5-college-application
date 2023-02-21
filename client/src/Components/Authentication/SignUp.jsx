@@ -53,7 +53,7 @@ function SignUp({loggedIn,logInUser}) {
 
   const handleSubmit=(e)=>{
       e.preventDefault();
-      fetch(baseUrl+'/users',{
+      fetch('/users',{
           method:'POST',
           headers: {
               ...header,
@@ -64,7 +64,7 @@ function SignUp({loggedIn,logInUser}) {
           .then((response) => {
               if (response.ok) {
                   response.json().then((data) =>{
-                      logInUser(data.user)
+                      logInUser(data)
                       //localStorage.setItem('jwt', data.token)
                       navigate('/colleges')
                   });

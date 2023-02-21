@@ -49,6 +49,7 @@ const paginate=(pageNumber)=>{
       setCurrentUser(user)
       setLoggedIn(true)
     
+    
   }
 
   const submitApplication=(newApplication)=>{
@@ -56,46 +57,30 @@ const paginate=(pageNumber)=>{
     setApplications([...applications,newApplication])
   }
 
+  useEffect(()=>{
+     fetch('/get-current-user',{
+        method:'GET',
+        headers:{
+          ...header
+         
+        }
+      })
+      .then(res=>res.json())
+      .then(user=>{
+        logInUser(user)
+      }
+        
+    )
 
-  useEffect(() => {
-      fetch("/get-current-user", {
-      }).then((res) => {
-        if (res.ok) {
-          res.json().then((user) => {
-            logInUser(user)
-          });
-        } 
-      });
-    
-    
-   
-  }, []);
-
+},[])
 
   useEffect(()=>{
     //const token=localStorage.getItem('jwt')
-    //if(token && !loggedIn){
- 
-    //   fetch(baseUrl+'/get-current-user',{
-    //     method:'GET',
-    //     headers:{
-    //       ...header,
-    //       //...getToken()
-    //     }
-    //   })
-    //   .then(res=>res.json())
-    //   .then(user=>{
-    //     logInUser(user)
-    //   }
-        
-    // )} 
     if(loggedIn){
       fetch('/colleges',{
         method:'GET',
-
         headers:{
-          ...header,
-          //...getToken()
+          ...header
         }
       })
       .then(res=>res.json())
@@ -109,10 +94,8 @@ const paginate=(pageNumber)=>{
     if(loggedIn){
       fetch(`/users/${currentUser.id}/applications`,{
         method:'GET',
-        credentials: 'same-origin',
         headers:{
-          ...header,
-          //...getToken()
+          ...header
         }
       })
       .then(res=>res.json())
@@ -151,17 +134,12 @@ const paginate=(pageNumber)=>{
     setCurrentUser(null)
     setLoggedIn(false)
     setColleges([])
-    setApplications([])
-    //localStorage.removeItem('jwt')
 
   }
 
   function handleDelete(application){
-    fetch(baseUrl+`/applications/${application.id}`,{
-      method:'DELETE',
-      headers:{
-        //...getToken()
-      }
+    fetch(`/applications/${application.id}`,{
+      method:'DELETE'
     })
     .then(()=>{
       setApplications(applications.filter(currentApplication=>currentApplication.id !== application.id))
@@ -173,6 +151,10 @@ const paginate=(pageNumber)=>{
   }
 
  
+
+
+
+
 
 
   return (
