@@ -70,10 +70,13 @@ const paginate=(pageNumber)=>{
       })
       .then(res=>res.json())
       .then(user=>{
-        logInUser(user)
+        if(!user.error){
+          logInUser(user)
+          
+        }
       }
         
-    )
+    ).catch(error=>console.log("hisfhifdsh"))
 
 },[])
 
@@ -88,6 +91,7 @@ const paginate=(pageNumber)=>{
       .then(res=>res.json())
       .then(college=>{
         setColleges(college)
+        
 
 
       }
@@ -138,6 +142,8 @@ const paginate=(pageNumber)=>{
    setCurrentUser(null)
    setLoggedIn(false)
    setColleges([])
+   setCurrentPage(1)
+   setSearch('')
 
   }
 
