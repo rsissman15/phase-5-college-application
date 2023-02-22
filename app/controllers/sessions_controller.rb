@@ -2,6 +2,7 @@ class SessionsController <  ApplicationController
   skip_before_action :authenticate, only: [:create]
 
   def create
+    
     @user = User.find_by_username(params[:username])
     if @user && @user.authenticate(params[:password])
       login_user
@@ -12,12 +13,11 @@ class SessionsController <  ApplicationController
    
   end
 
-  # logout - destroy the session
   def destroy
-    reset_session
-    render json: { errors: ["Successfully logged out"]}, status: :ok
+    session.delete :user_id
+    head :no_content
+   
   end
-
 
 
    

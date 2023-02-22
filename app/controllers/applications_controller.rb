@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
     before_action :find_college
-    #skip_before_action :authenticate, only: [:index,:show]
+ 
     
     def index
         if params[:user_id]

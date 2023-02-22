@@ -4,11 +4,12 @@ class User < ApplicationRecord
     has_many :applications
     has_many :colleges, through: :applications
 
-    validate :password_lower_case
-    validate :password_uppercase
-    validate :password_special_char
-    validate :password_contains_number
+    # validate :password_lower_case
+    # validate :password_uppercase
+    # validate :password_special_char
+    # validate :password_contains_number
     validates :username, uniqueness: true
+    validates_presence_of :email,:password,:username
     validates :email, uniqueness: true , format: { with: URI::MailTo::EMAIL_REGEXP } 
   
     def password_uppercase

@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './NavBar';
 import LoginPage from '../Authentication/LoginPage';
 import SignUp from '../Authentication/SignUp';
-import { header,baseUrl,getToken } from '../Globals.js';
+import { header } from '../Globals.js';
 import CollegeList from '../Colleges/CollegeList';
 import College from '../Colleges/College';
 import ApplicationsList from '../Applications/ApplicationsList';
@@ -15,6 +15,8 @@ import Profile from './Profile/Profile';
 
 
 function MainContainer() {
+
+
   const [currentUser,setCurrentUser]=useState(null)
   const [loggedIn,setLoggedIn]=useState(false)
   const [colleges,setColleges]=useState([])
@@ -58,7 +60,8 @@ const paginate=(pageNumber)=>{
   }
 
   useEffect(()=>{
-     fetch('/get-current-user',{
+    
+      fetch('/get-current-user',{
         method:'GET',
         headers:{
           ...header
@@ -75,7 +78,6 @@ const paginate=(pageNumber)=>{
 },[])
 
   useEffect(()=>{
-    //const token=localStorage.getItem('jwt')
     if(loggedIn){
       fetch('/colleges',{
         method:'GET',
@@ -108,6 +110,7 @@ const paginate=(pageNumber)=>{
     )} 
   },[loggedIn])
 
+
   const collegeData = useMemo(() => {
     let computedCollege = colleges;
   
@@ -128,12 +131,13 @@ const paginate=(pageNumber)=>{
 
 
 
-
-
   const logoutUser=()=>{
-    setCurrentUser(null)
-    setLoggedIn(false)
-    setColleges([])
+    fetch('/logout',{
+      method: "DELETE"
+    })
+   setCurrentUser(null)
+   setLoggedIn(false)
+   setColleges([])
 
   }
 
@@ -155,12 +159,10 @@ const paginate=(pageNumber)=>{
 
 
 
-
-
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar loggedIn={loggedIn} currentUser={currentUser} logoutUser={logoutUser}/>
+        <Navbar loggedIn={loggedIn} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} currentUser={currentUser} logoutUser={logoutUser}/>
         <Routes>
           <Route path="/home" element={<Home loggedIn={loggedIn}/>}></Route>
           <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>

@@ -33,7 +33,6 @@ const SearchBar = ({search,setSearch}) => {
           placeholder="Search Colleges..."
           onChange={handleChange}
           value={search}
-          textAlign='center'
           fontWeight= 'bold'
     
             />

@@ -30,9 +30,8 @@ export default function NavBar({loggedIn,logoutUser,currentUser}) {
 
   const handleLogout=e=>{
     e.preventDefault();
-    logoutUser();
+    logoutUser()
     navigate('/home')  
-
   }
 
   const logInLinks=()=>{

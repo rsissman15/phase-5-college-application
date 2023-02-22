@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { header,baseUrl,getToken } from '../Globals.js';
+import { header} from '../Globals.js';
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import TextField from '@mui/material/TextField';
@@ -65,7 +65,6 @@ function SignUp({loggedIn,logInUser}) {
               if (response.ok) {
                   response.json().then((data) =>{
                       logInUser(data)
-                      //localStorage.setItem('jwt', data.token)
                       navigate('/colleges')
                   });
               } 

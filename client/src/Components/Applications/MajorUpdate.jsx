@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Button from 'react-bootstrap/Button';
-import { header,baseUrl,getToken } from '../Globals.js';
+import { header } from '../Globals.js';
 import { useNavigate } from 'react-router-dom'
 import Error from '../../Styles.js/Error.jsx';
 
