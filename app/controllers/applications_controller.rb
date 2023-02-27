@@ -1,6 +1,5 @@
 class ApplicationsController < ApplicationController
     before_action :find_college
- 
     
     def index
         if params[:user_id]
