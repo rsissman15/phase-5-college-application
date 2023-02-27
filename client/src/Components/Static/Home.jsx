@@ -1,8 +1,9 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import styled from "styled-components";
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from "../../Context/UserContext";
 
 
 
@@ -21,8 +22,9 @@ const BannerContainer = styled.div`
 
 
 
-function Home({loggedIn}) {
+function Home() {
     const navigate=useNavigate();
+    const { loggedIn } = useContext(UserContext);
 
 
     const logInHome=()=>{

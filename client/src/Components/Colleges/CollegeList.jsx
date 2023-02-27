@@ -1,11 +1,12 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect,useContext } from 'react';
 import SearchBar from '../Static/SearchBar'
 import Colleges from './Colleges'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import styled from "styled-components";
 import Pagination from '../Static/Pagination';
+import { UserContext } from '../../Context/UserContext';
 
 
 const BannerContainer = styled.div`
@@ -23,7 +24,10 @@ const BannerContainer = styled.div`
 
 
 
-const CollegeList = ({colleges,search,setSearch,loggedIn,collegesPerPage,totalColleges, paginate}) => {
+const CollegeList = ({colleges,search,setSearch,collegesPerPage,totalColleges, paginate}) => {
+
+  const { loggedIn } = useContext(UserContext);
+
 
 
   const displayColleges=colleges.map(college=><Colleges key={college.id} college={college}/>)

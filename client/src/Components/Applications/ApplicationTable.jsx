@@ -2,7 +2,6 @@ import React,{useState} from 'react'
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { Button } from '@mui/material';
-// import Button from 'react-bootstrap/Button';
 import MajorUpdate from './MajorUpdate';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';

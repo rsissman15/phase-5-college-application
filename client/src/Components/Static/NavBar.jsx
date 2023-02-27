@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react'
+import { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Button from "react-bootstrap/esm/Button";
@@ -6,13 +7,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import Avatar from '@mui/material/Avatar';
 import Person2Icon from '@mui/icons-material/Person2';
 import SchoolIcon from '@mui/icons-material/School';
+import { UserContext } from '../../Context/UserContext';
 
 
 
 
-export default function NavBar({loggedIn,logoutUser,currentUser}) {
+export default function NavBar({logoutUser}) {
+  const { currentUser,loggedIn } = useContext(UserContext);
  
   const navigate=useNavigate();
+  
 
 
   const logOutLinks=()=>{

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect,useMemo } from "react";
+import { useState, useEffect,useMemo,useContext } from "react";
 import Home from './Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './NavBar';
@@ -10,6 +10,9 @@ import CollegeList from '../Colleges/CollegeList';
 import College from '../Colleges/College';
 import ApplicationsList from '../Applications/ApplicationsList';
 import Profile from './Profile/Profile';
+import { UserContext } from '../../Context/UserContext';
+import { CollegeContext } from '../../Context/CollegeContext';
+import { ApplicationContext } from '../../Context/ApplicationContext';
 
 
 
@@ -17,13 +20,17 @@ import Profile from './Profile/Profile';
 function MainContainer() {
 
 
-  const [currentUser,setCurrentUser]=useState(null)
-  const [loggedIn,setLoggedIn]=useState(false)
-  const [colleges,setColleges]=useState([])
-  const [applications,setApplications]=useState([])
+  // const [currentUser,setCurrentUser]=useState(null)
+  // const [loggedIn,setLoggedIn]=useState(false)
+  //const [colleges,setColleges]=useState([])
+  //const [applications,setApplications]=useState([])
   const [search, setSearch] = useState('')
   const [currentPage,setCurrentPage]=useState(1)
   const [collegesPerPage]=useState(150)
+
+  const { currentUser,setCurrentUser,loggedIn,setLoggedIn,logInUser } = useContext(UserContext);
+  const {colleges,setColleges}=useContext(CollegeContext)
+  const {applications,setApplications}=useContext(ApplicationContext)
 
 
   colleges.sort(function(a, b){
@@ -46,73 +53,73 @@ const paginate=(pageNumber)=>{
 
   
 
-  const logInUser=(user)=>{
+  // const logInUser=(user)=>{
     
-      setCurrentUser(user)
-      setLoggedIn(true)
+  //     setCurrentUser(user)
+  //     setLoggedIn(true)
     
     
-  }
+  // }
 
   const submitApplication=(newApplication)=>{
  
     setApplications([...applications,newApplication])
   }
 
-  useEffect(()=>{
+//   useEffect(()=>{
     
-      fetch('/get-current-user',{
-        method:'GET',
-        headers:{
-          ...header
+//       fetch('/get-current-user',{
+//         method:'GET',
+//         headers:{
+//           ...header
          
-        }
-      })
-      .then(res=>res.json())
-      .then(user=>{
-        if(!user.error){
-          logInUser(user)
+//         }
+//       })
+//       .then(res=>res.json())
+//       .then(user=>{
+//         if(!user.error){
+//           logInUser(user)
           
-        }
-      }
+//         }
+//       }
         
-    ).catch(error=>console.log("hisfhifdsh"))
+//     )
 
-},[])
+// },[])
 
-  useEffect(()=>{
-    if(loggedIn){
-      fetch('/colleges',{
-        method:'GET',
-        headers:{
-          ...header
-        }
-      })
-      .then(res=>res.json())
-      .then(college=>{
-        setColleges(college)
+  // useEffect(()=>{
+    // if(loggedIn){
+    //   fetch('/colleges',{
+    //     method:'GET',
+    //     headers:{
+    //       ...header
+    //     }
+    //   })
+    //   .then(res=>res.json())
+    //   .then(college=>{
+    //     setColleges(college)
         
 
 
-      }
+    //   }
        
-    )} 
-    if(loggedIn){
-      fetch(`/users/${currentUser.id}/applications`,{
-        method:'GET',
-        headers:{
-          ...header
-        }
-      })
-      .then(res=>res.json())
-      .then(application=>{
-        setApplications(application)
+    // )} 
+  //   if(loggedIn){
+  //     fetch(`/users/${currentUser.id}/applications`,{
+  //       method:'GET',
+  //       headers:{
+  //         ...header
+  //       }
+  //     })
+  //     .then(res=>res.json())
+  //     .then(application=>{
+  //       setApplications(application)
 
 
-      }
+  //     }
        
-    )} 
-  },[loggedIn])
+  //   )} 
+  // },[loggedIn])
 
 
   const collegeData = useMemo(() => {
@@ -134,7 +141,6 @@ const paginate=(pageNumber)=>{
   }, [colleges, currentPage, search]);
 
 
-
   const logoutUser=()=>{
     fetch('/logout',{
       method: "DELETE"
@@ -147,18 +153,10 @@ const paginate=(pageNumber)=>{
 
   }
 
-  function handleDelete(application){
-    fetch(`/applications/${application.id}`,{
-      method:'DELETE'
-    })
-    .then(()=>{
-      setApplications(applications.filter(currentApplication=>currentApplication.id !== application.id))
-    })
-  }
 
-  function handleUpdateApplication(application){
-    setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, major: application.major}))
-  }
+
+ 
+
 
  
 
@@ -168,17 +166,17 @@ const paginate=(pageNumber)=>{
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar loggedIn={loggedIn} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} currentUser={currentUser} logoutUser={logoutUser}/>
+        <Navbar logoutUser={logoutUser}/>
         <Routes>
-          <Route path="/home" element={<Home loggedIn={loggedIn}/>}></Route>
-          <Route path="/login" element={<LoginPage loggedIn={loggedIn} logInUser={logInUser}/>}></Route>
-          <Route path="/signup" element={<SignUp logInUser={logInUser} loggedIn={loggedIn} />}></Route>
-          <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch} loggedIn={loggedIn}/>}></Route>
-          <Route path="/colleges/:id" element={ <College colleges={colleges} loggedIn={loggedIn} submitApplication={submitApplication}/> } />
-          <Route path="/applications" element={ <ApplicationsList applications={applications} currentUser={currentUser} loggedIn={loggedIn} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication}/> } />
-          <Route path='/me' element={<Profile currentUser={currentUser} loggedIn={loggedIn}/>}/>
-          <Route path='*' element={<Home  loggedIn={loggedIn} />} />
-         
+          <Route path="/home" element={<Home/>}></Route>
+          <Route path="/login" element={<LoginPage/>}></Route>
+          <Route path="/signup" element={<SignUp/>}></Route>
+          <Route path='/colleges' element={<CollegeList colleges={collegeData} collegesPerPage={collegesPerPage} totalColleges={colleges.length} paginate={paginate} search={search} setSearch={setSearch}/>}></Route>
+          <Route path="/colleges/:id" element={ <College submitApplication={submitApplication}/> } />
+          <Route path="/applications" element={ <ApplicationsList/> } />
+          <Route path='/me' element={<Profile/>}/>
+          <Route path='*' element={<Home />} />
+
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { header } from '../Globals.js';
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Error from '../../Styles.js/Error.jsx';
+import { UserContext } from '../../Context/UserContext.jsx';
 
 const BannerContainer = styled.div`
     width: auto;
@@ -26,13 +27,14 @@ const BannerContainer = styled.div`
 
 
 
-function LoginPage({logInUser,loggedIn}) {
+function LoginPage() {
     const [formData,setFormData]=useState({
         username:"",
         password:""
     
       })
     const navigate=useNavigate();
+    const { logInUser,loggedIn } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
 
       const handleChange=(e)=>{

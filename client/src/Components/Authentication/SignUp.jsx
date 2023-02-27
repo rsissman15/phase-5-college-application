@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { header} from '../Globals.js';
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Form from 'react-bootstrap/Form';
 import Error from '../../Styles.js/Error.jsx';
+import { UserContext } from '../../Context/UserContext.jsx';
 
 
 const BannerContainer = styled.div`
@@ -26,7 +27,7 @@ const BannerContainer = styled.div`
 
 
 
-function SignUp({loggedIn,logInUser}) {
+function SignUp() {
   const [formData,setFormData]=useState({
     email:"",
     username:"",
@@ -37,6 +38,7 @@ function SignUp({loggedIn,logInUser}) {
 
   const [errors, setErrors] = useState([]);
   const navigate=useNavigate();
+  const { logInUser,loggedIn } = useContext(UserContext);
 
   const handleChange=(e)=>{
     setFormData({

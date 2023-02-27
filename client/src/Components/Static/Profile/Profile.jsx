@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import EditIcon from '@mui/icons-material/Edit';
+import { UserContext } from '../../../Context/UserContext';
 
 
 
 
 
 
-const Profile = ({currentUser,loggedIn}) => {
+const Profile = () => {
+
+  const { loggedIn,currentUser } = useContext(UserContext);
 
   //const [form,setForm]=useState(false)
 

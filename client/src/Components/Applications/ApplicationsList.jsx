@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ApplicationTable from './ApplicationTable'
 import styled from "styled-components";
 import TableHead from '@mui/material/TableHead';
@@ -9,6 +9,7 @@ import Table from '@mui/material/Table';
 import { TableContainer } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { TableBody } from '@mui/material';
+import { ApplicationContext } from '../../Context/ApplicationContext';
 
 
 
@@ -41,8 +42,9 @@ const useStyles = makeStyles({
 
 
 
-const ApplicationsList = ({applications,handleDelete,handleUpdateApplication}) => {
+const ApplicationsList = () => {
   const classes = useStyles();
+  const {applications,handleDelete,handleUpdateApplication}=useContext(ApplicationContext)
 
     const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication} />)
   return (
