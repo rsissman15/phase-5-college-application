@@ -8,60 +8,72 @@ import Error from '../../Styles.js/Error.jsx';
 const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
 
   const [majorType]= useState([
-    "Architecture",
-    "Arts & Museum Mgmt",
-    "Dance",
-    "Fashion & Apparel Design",
-    "Film / Broadcast",
-    "Graphic Design",
-    "Music (Instrumental)",
-    "Theatre (Drama + Musical)",
-    "Urban & Regional Planning",
-    "Web Design & Digital Media","Athletic Training",
-    "Biology",
-    "Chemistry",
-    "Food Science",
-    "Nursing (RN/BSN)",
-    "Pharmacy",
-    "Physical Ther / Kinesiology",
-    "Physicians Assistant",
-    "Pre - Dental",
-    "Pre - Medical",
-    "Pre - Veterinary Medicine","Education",
-    "English & Writing",
-    "History",
-    "Human Dev & Family Sci",
-    "Journalism",
-    "Mathematics",
-    "Non-Profit Management",
-    "Philosophy",
-    "Political Science",
-    "Psychology / Sociology",
-    "Womens Studies (+LGBT)","Aerospace Engineering",
-    "Astronomy / Physics",
-    "Aviation & Aeronautics",
-    "Biomedical Engineering",
-    "Chemical Engineering",
-    "Civil Engineering",
-    "Computer Science",
-    "Cyber Security",
-    "Electrical Engineering",
-    "Industrial Engineering",
-    "Mechanical Engineering",
-    "Accounting", 
-    "Business - General",
-    "Data Science - Analytics",
-    "Economics (Global)",
-    "Finance & Banking",
-    "Hotel & Resort Mgmt",
-    "Human Resources Mgmt",
-    "Information Systems (MIS)",
-    "Insurance & Risk Mgmt",
-    "Marketing & PR",
-    "Public Health Administration",
-    "Sport Management",
-    "Supply Chain (Logistics)","Undecided","Other"])
+    "Accounting",
+    "Aerospace Engineering",
+  "Architecture",
+  "Arts & Museum Mgmt",
+  "Astronomy / Physics",
+  "Athletic Training",
+  "Aviation & Aeronautics",
+  "Biology",
+  "Biomedical Engineering",
+  "Business - General",
+  "Chemical Engineering",
+  "Chemistry",
+  "Civil Engineering",
+  "Computer Science",
+  "Cyber Security",
+  "Dance",
+  "Data Science - Analytics",
+  "Economics (Global)",
+  "Education",
+  "Electrical Engineering",
+  "English & Writing",
+  "Fashion & Apparel Design",
+  "Film / Broadcast",
+  "Finance & Banking",
+  "Food Science",
+  "Graphic Design",
+  "History",
+  "Hotel & Resort Mgmt",
+  "Human Dev & Family Sci",
+  "Human Resources Mgmt",
+  "Industrial Engineering",
+  "Information Systems (MIS)",
+  "Insurance & Risk Mgmt",
+  "Journalism",
+  "Marketing & PR",
+  "Mathematics",
+  "Mechanical Engineering",
+  "Music (Instrumental)",
+  "Non-Profit Management",
+  "Nursing (RN/BSN)",
+  "Other",
+  "Pharmacy",
+  "Philosophy",
+  "Physical Ther / Kinesiology",
+  "Physicians Assistant",
+  "Political Science",
+  "Pre - Dental",
+  "Pre - Medical",
+  "Pre - Veterinary Medicine",
+  "Psychology / Sociology",
+  "Public Health Administration",
+  "Sport Management",
+  "Supply Chain (Logistics)",
+  "Theatre (Drama + Musical)",
+  "Undecided",
+  "Urban & Regional Planning",
+  "Web Design & Digital Media",
+  "Womens Studies (+LGBT)"])
     const Add = majorType.map(Add => Add)
+
+    
+    majorType.sort(function(a, b){
+      if(a < b) { return -1; }
+      if(a> b) { return 1; }
+      return 0;
+    })
 
   
     
@@ -71,11 +83,6 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
     const navigate=useNavigate();
     const [errors, setErrors] = useState([]);
 
-    majorType.sort(function(a, b){
-      if(a < b) { return -1; }
-      if(a> b) { return 1; }
-      return 0;
-    })
 
 
 
@@ -95,7 +102,7 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
             ...header
         },
         body:JSON.stringify({major: major})
-    }) .then((response) => {
+    }).then((response) => {
       if (response.ok) {
           response.json().then((data) =>{
             handleUpdateApplication(data)

@@ -20,20 +20,16 @@ import { ApplicationContext } from '../../Context/ApplicationContext';
 function MainContainer() {
 
 
-  // const [currentUser,setCurrentUser]=useState(null)
-  // const [loggedIn,setLoggedIn]=useState(false)
-  //const [colleges,setColleges]=useState([])
-  //const [applications,setApplications]=useState([])
   const [search, setSearch] = useState('')
   const [currentPage,setCurrentPage]=useState(1)
-  const [collegesPerPage]=useState(150)
+  const [collegesPerPage]=useState(225)
 
   const { currentUser,setCurrentUser,loggedIn,setLoggedIn,logInUser } = useContext(UserContext);
   const {colleges,setColleges}=useContext(CollegeContext)
   const {applications,setApplications}=useContext(ApplicationContext)
 
 
-  colleges.sort(function(a, b){
+colleges.sort(function(a, b){
     if(a.name < b.name) { return -1; }
     if(a.name > b.name) { return 1; }
     return 0;
@@ -52,74 +48,12 @@ const paginate=(pageNumber)=>{
 }
 
   
-
-  // const logInUser=(user)=>{
-    
-  //     setCurrentUser(user)
-  //     setLoggedIn(true)
-    
-    
-  // }
-
   const submitApplication=(newApplication)=>{
  
     setApplications([...applications,newApplication])
   }
 
-//   useEffect(()=>{
-    
-//       fetch('/get-current-user',{
-//         method:'GET',
-//         headers:{
-//           ...header
-         
-//         }
-//       })
-//       .then(res=>res.json())
-//       .then(user=>{
-//         if(!user.error){
-//           logInUser(user)
-          
-//         }
-//       }
-        
-//     )
 
-// },[])
-
-  // useEffect(()=>{
-    // if(loggedIn){
-    //   fetch('/colleges',{
-    //     method:'GET',
-    //     headers:{
-    //       ...header
-    //     }
-    //   })
-    //   .then(res=>res.json())
-    //   .then(college=>{
-    //     setColleges(college)
-        
-
-
-    //   }
-       
-    // )} 
-  //   if(loggedIn){
-  //     fetch(`/users/${currentUser.id}/applications`,{
-  //       method:'GET',
-  //       headers:{
-  //         ...header
-  //       }
-  //     })
-  //     .then(res=>res.json())
-  //     .then(application=>{
-  //       setApplications(application)
-
-
-  //     }
-       
-  //   )} 
-  // },[loggedIn])
 
 
   const collegeData = useMemo(() => {
@@ -152,14 +86,6 @@ const paginate=(pageNumber)=>{
    setSearch('')
 
   }
-
-
-
- 
-
-
- 
-
 
 
 
