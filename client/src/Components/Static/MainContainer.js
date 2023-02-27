@@ -1,11 +1,10 @@
 import React from 'react'
-import { useState, useEffect,useMemo,useContext } from "react";
+import { useState, useMemo,useContext } from "react";
 import Home from './Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './NavBar';
 import LoginPage from '../Authentication/LoginPage';
 import SignUp from '../Authentication/SignUp';
-import { header } from '../Globals.js';
 import CollegeList from '../Colleges/CollegeList';
 import College from '../Colleges/College';
 import ApplicationsList from '../Applications/ApplicationsList';
@@ -24,7 +23,7 @@ function MainContainer() {
   const [currentPage,setCurrentPage]=useState(1)
   const [collegesPerPage]=useState(225)
 
-  const { currentUser,setCurrentUser,loggedIn,setLoggedIn,logInUser } = useContext(UserContext);
+  const { setCurrentUser,setLoggedIn} = useContext(UserContext);
   const {colleges,setColleges}=useContext(CollegeContext)
   const {applications,setApplications}=useContext(ApplicationContext)
 

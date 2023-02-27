@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useContext } from 'react'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import EditIcon from '@mui/icons-material/Edit';
 import { UserContext } from '../../../Context/UserContext';
@@ -12,11 +12,7 @@ const Profile = () => {
 
   const { loggedIn,currentUser } = useContext(UserContext);
 
-  //const [form,setForm]=useState(false)
-
-  // const handleClick=()=>{
-  //   setForm(click=>!click)
-  // }
+ 
   const profile=()=>{
     return(
       <section className="vh-100" style={{ background:"linear-gradient(109.6deg, rgba(0, 0, 0, 0.93) 11.2%, rgb(63, 61, 61) 78.9%)" }}>

@@ -101,6 +101,9 @@ function SignUp() {
                     input: {
                       color: "black",
                       background: "white"
+                    }, width: { sm: 800, md: 800 },
+                    "& .MuiInputBase-root": {
+                        height: 80
                     }
                   }}
                 />
@@ -120,6 +123,10 @@ function SignUp() {
                     input: {
                       color: "black",
                       background: "white"
+                    }, 
+                    width: { sm: 800, md: 800 },
+                    "& .MuiInputBase-root": {
+                        height: 80
                     }
                   }}
                 
@@ -128,9 +135,9 @@ function SignUp() {
               <Grid item xs={12} align="center">
                 <TextField
                   required
-                  
                   name="password"
-                  label="Password"
+               
+                  label="password (must contain uppercase,lowercase,special character and number)"
                   type="password"
                   id="password"
                   variant="filled"
@@ -140,6 +147,12 @@ function SignUp() {
                     input: {
                       color: "black",
                       background: "white"
+              
+                      
+                    },
+                    width: { sm: 800, md: 800 },
+                    "& .MuiInputBase-root": {
+                        height: 80
                     }
                   }}
                 />
