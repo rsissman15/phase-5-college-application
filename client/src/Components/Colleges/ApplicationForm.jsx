@@ -203,8 +203,11 @@ const ApplicationForm = ({colleges,submitApplication}) => {
                 <Grid item xs={12} align="center">
                 < select
                     onChange={e => handlemajorTypeChange(e)}
-                    className="browser-default custom-select">
-                    <option selected disabled>Select Major</option>
+                    className="browser-default custom-select"
+                    label="Select Major"
+                    >
+                    
+                    <option  disabled={major}>Select Major</option>
                     {
                         Add.map((address, key) => <option key={key} value={key}>{address} 
                         </option>)

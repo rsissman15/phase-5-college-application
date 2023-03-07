@@ -33,9 +33,10 @@ function LoginPage() {
         password:""
     
       })
-    const navigate=useNavigate();
+   
     const { logInUser,loggedIn } = useContext(UserContext);
     const [errors, setErrors] = useState([]);
+    const navigate=useNavigate();
 
       const handleChange=(e)=>{
         setFormData({
@@ -48,6 +49,7 @@ function LoginPage() {
       useEffect(()=>{
         if(loggedIn){
             navigate('/colleges')
+
         }
        },[loggedIn])
 

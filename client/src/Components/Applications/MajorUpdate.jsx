@@ -130,8 +130,10 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
           <form className="add-activity-form" onSubmit={handleSubmit}>
             < select
             onChange={e => handlemajorTypeChange(e)}
-            className="browser-default custom-select">
-            <option selected disabled>Select Major</option>
+            className="browser-default custom-select"
+            label="Select Major"
+            >
+            <option disabled={majorType}>Select Major</option>
             {
                 Add.map((address, key) => <option key={key} value={key}>{address} 
                 </option>)
