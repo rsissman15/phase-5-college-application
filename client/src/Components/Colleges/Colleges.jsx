@@ -10,12 +10,15 @@ const Colleges = ({college}) => {
   const handleClick=()=>{
     navigate(`/colleges/${college.id}`)
   }
+  
 
   return (
-    <div>
+    <div> 
        <ul>
-       <Button onClick={handleClick} variant="info" className="ms-3">Click for More Info</Button>
-        {college.name}
+       <Button padding="10px 60px" onClick={handleClick} variant="info" className="mx-auto mr-20" >Click for More Info</Button>
+       &nbsp;&nbsp;&nbsp;
+       {college.name}
+
         
         </ul>
 

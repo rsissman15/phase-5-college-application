@@ -31,6 +31,8 @@ function Home() {
         return(
             <div> 
             <h1 style={{ color: "White", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>Welcome to College Power Planner</h1>
+            <h3 style={{ color: "White", fontSize: "30px", textAlign: "center", textShadow: "2px 2px black" }}>Where you can stay organized during the college application process! 
+            Browse through a list of thousands of collges and add you application information in. See the list of all your applications in the "My Applications" tab and make any edits to you application in there. </h3>
             </div>
 
         )
@@ -43,7 +45,7 @@ function Home() {
         return(
             <div>
                 <h1 style={{ color: "White", fontSize: "60px", textAlign: "center", textShadow: "2px 2px black" }}>Welcome to College Power Planner</h1>
-                <h2 style={{ color: "White", fontSize: "35px", textAlign: "center", textShadow: "2px 2px black" }}>To help you stay organized during your college application process!</h2>
+                <h2 style={{ color: "White", fontSize: "35px", textAlign: "center", textShadow: "2px 2px black" }}>To help you stay organized during your college application process! Login in or sign up to get started.</h2>
                 <Button variant="info" className="ms-3" size="lg" onClick={()=>navigate(`/login`)}>Login</Button>
                 <Button variant="info" className="ms-3" size="lg" onClick={()=>navigate(`/signup`)}>Signup</Button>
             </div>

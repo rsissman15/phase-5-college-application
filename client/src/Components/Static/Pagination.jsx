@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap';
 
 
 const Pagination = ({collegesPerPage, totalColleges,paginate}) => {
@@ -10,7 +11,7 @@ const Pagination = ({collegesPerPage, totalColleges,paginate}) => {
     }
 
    const renderPageNumbers=pageNumbers.map(number=>  <li key={number} className='page-item'>
-   <a onClick={()=>paginate(number)} className='page-link'> {number}</a>
+   <Button  onClick={()=>paginate(number)} className='page-link'> {number}</Button>
 
  </li>)
     

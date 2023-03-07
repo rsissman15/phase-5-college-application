@@ -49,9 +49,8 @@ function LoginPage() {
       useEffect(()=>{
         if(loggedIn){
             navigate('/colleges')
-
         }
-       },[loggedIn])
+       })
 
 
        const handleSubmit=(e)=>{

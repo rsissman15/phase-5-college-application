@@ -31,7 +31,7 @@ function ApplicationProvider ({ children }) {
           )} 
    
          
-      },[loggedIn])
+      },[loggedIn,currentUser])
 
 
 
@@ -44,15 +44,25 @@ function ApplicationProvider ({ children }) {
         })
       }
     
-      function handleUpdateApplication(application){
+      function handleUpdateMajorApplication(application){
         setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, major: application.major}))
       }
-    
- 
+
+      function handleUpdateDateApplication(application){
+       
+        setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, application_deadline: application.application_deadline}))
+      }
+
+      function handleUpdateFileApplication(application){
+        setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, file_data: application.file_data}))
+      }
+
+      console.log(applications)
+   
  
 
   return (
-    <ApplicationContext.Provider value={{applications,setApplications,handleDelete,handleUpdateApplication }}>
+    <ApplicationContext.Provider value={{applications,setApplications,handleDelete,handleUpdateMajorApplication,handleUpdateDateApplication,handleUpdateFileApplication }}>
       {children}
     </ApplicationContext.Provider>
   )

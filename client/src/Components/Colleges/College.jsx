@@ -65,13 +65,13 @@ const College = ({submitApplication}) => {
       useEffect(()=>{
         const college=colleges.find(a=>a.id.toString()===id)
         setCollege(college)
-      },[id])
+      },[colleges, id])
     
       useEffect(()=>{
         if(!loggedIn){
           navigate('/login')
         }
-      },[loggedIn])
+      })
 
     
   return (

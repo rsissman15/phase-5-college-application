@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Error from '../../Styles.js/Error.jsx';
 
 
-const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
+const MajorUpdate = ({application, handleUpdateMajorApplication,setShowMajorForm}) => {
 
   const [majorType]= useState([
     "Accounting",
@@ -105,10 +105,10 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
     }).then((response) => {
       if (response.ok) {
           response.json().then((data) =>{
-            handleUpdateApplication(data)
+            handleUpdateMajorApplication(data)
             navigate('/applications')
             alert("Your major has been updated")
-           setShowForm(false)
+            setShowMajorForm(false)
             
 
 
@@ -133,7 +133,7 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
             className="browser-default custom-select"
             label="Select Major"
             >
-            <option disabled={majorType}>Select Major</option>
+            <option>Select Major</option>
             {
                 Add.map((address, key) => <option key={key} value={key}>{address} 
                 </option>)
@@ -141,6 +141,7 @@ const MajorUpdate = ({application, handleUpdateApplication,setShowForm}) => {
             
           </select >
           <Button variant="info" className="ms-3" type='submit'>Update Major</Button>
+          <Button variant="info" className="ms-3" type='submit' onClick={()=>setShowMajorForm(false)}>Cancel</Button>
       </form>
       
         {errors ?  

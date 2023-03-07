@@ -51,7 +51,7 @@ function SignUp() {
   if(loggedIn){
       navigate('/colleges')
   }
- },[loggedIn])
+ })
 
   const handleSubmit=(e)=>{
       e.preventDefault();

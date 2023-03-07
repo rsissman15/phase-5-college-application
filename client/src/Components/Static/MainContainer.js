@@ -16,6 +16,7 @@ import { ApplicationContext } from '../../Context/ApplicationContext';
 
 
 
+
 function MainContainer() {
 
 
@@ -71,7 +72,7 @@ const paginate=(pageNumber)=>{
       (currentPage - 1) * collegesPerPage,
       (currentPage - 1) * collegesPerPage + collegesPerPage
   );
-  }, [colleges, currentPage, search]);
+  }, [colleges, currentPage, search,collegesPerPage]);
 
 
   const logoutUser=()=>{
@@ -101,7 +102,6 @@ const paginate=(pageNumber)=>{
           <Route path="/applications" element={ <ApplicationsList/> } />
           <Route path='/me' element={<Profile/>}/>
           <Route path='*' element={<Home />} />
-
         </Routes>
       </div>
     </BrowserRouter>

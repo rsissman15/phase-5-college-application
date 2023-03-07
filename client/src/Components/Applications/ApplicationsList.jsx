@@ -44,9 +44,13 @@ const useStyles = makeStyles({
 
 const ApplicationsList = () => {
   const classes = useStyles();
-  const {applications,handleDelete,handleUpdateApplication}=useContext(ApplicationContext)
+  const {applications,handleDelete,handleUpdateMajorApplication,handleUpdateDateApplication, handleUpdateFileApplication}=useContext(ApplicationContext)
 
-    const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} handleDelete={handleDelete} handleUpdateApplication={handleUpdateApplication} />)
+    const renderApplications=applications.map(application=><ApplicationTable key={application.id} application={application} 
+      handleDelete={handleDelete} 
+      handleUpdateMajorApplication={handleUpdateMajorApplication} 
+      handleUpdateDateApplication={handleUpdateDateApplication}
+      handleUpdateFileApplication={handleUpdateFileApplication}/>)
   return (
 
     <BannerContainer>

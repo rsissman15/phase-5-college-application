@@ -38,7 +38,7 @@ const CollegeList = ({colleges,search,setSearch,collegesPerPage,totalColleges, p
     if(!loggedIn){
       navigate('/login')
     }
-  },[loggedIn])
+  })
 
 
   return (

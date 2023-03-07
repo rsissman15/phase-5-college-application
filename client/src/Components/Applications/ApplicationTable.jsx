@@ -5,6 +5,8 @@ import { Button } from '@mui/material';
 import MajorUpdate from './MajorUpdate';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
+import DateUpdate from './DateUpdate';
+import FileUpdate from './FileUpdate';
 
 
 
@@ -14,13 +16,26 @@ import FolderIcon from '@mui/icons-material/Folder';
 
 
 
-const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) => {
 
-    const [showForm,setShowForm]=useState(false)
+const ApplicationTable = ({application,handleDelete, handleUpdateMajorApplication,handleUpdateDateApplication,handleUpdateFileApplication}) => {
 
-    const handleForm=()=>{
-        setShowForm(click=>!click)
+    const [showMajorForm,setShowMajorForm]=useState(false)
+    const[showDateForm,setShowDateForm]=useState(false)
+    const[showFileForm,setShowFileForm]=useState(false)
+
+
+    const handleMajorForm=()=>{
+        setShowMajorForm(click=>!click)
     }
+
+    const handleDateForm=()=>{
+        setShowDateForm(click=>!click)
+    }
+
+    const handleFileForm=()=>{
+        setShowFileForm(click=>!click)
+    }
+
 
     const file_data_url=()=>{
         if(application.file_data==null){
@@ -32,7 +47,6 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
             return "http://localhost:3000/"+application.file_data
         }
     }
-
     const application_file_attached=()=>{
         if (application.file_data==null){
             return(
@@ -47,8 +61,6 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
     }
 
 
-
-
   return (
     <>
 
@@ -61,20 +73,26 @@ const ApplicationTable = ({application,handleDelete, handleUpdateApplication}) =
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
                 {application.major}
-                { showForm ? <MajorUpdate handleUpdateApplication={handleUpdateApplication} application={application} setShowForm={setShowForm}/> : 
-                  <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3" onClick={handleForm}>Update Major</EditIcon>
+                { showMajorForm ? <MajorUpdate handleUpdateMajorApplication={handleUpdateMajorApplication} application={application} setShowMajorForm={setShowMajorForm}/> : 
+                  <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3" onClick={handleMajorForm}>Update Major</EditIcon>
                    }     
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
                 {application.application_deadline}
+                { showDateForm ? <DateUpdate handleUpdateDateApplication={handleUpdateDateApplication} application={application} setShowDateForm={setShowDateForm}/> : 
+                  <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3" onClick={handleDateForm}>Update Date</EditIcon>
+                   }     
                 </TableCell>
                 <TableCell style={{color:'#00C5FF'}} align="center" component="th" scope="row">
                     {application_file_attached()}
+                    { showFileForm ? <FileUpdate handleUpdateFileApplication={handleUpdateFileApplication} application={application} setShowFileForm={setShowFileForm}/> : 
+                  <EditIcon style={{color:'#00C5FF'}} type="submit" variant="info" className="ms-3" onClick={handleFileForm}>Update Date</EditIcon>
+                   }   
                 </TableCell>
                 <TableCell>
                 <Button  style={{color:'#00C5FF'}} variant="info" className="ms-3" onClick={()=>(handleDelete(application))}>Delete</Button>
                 </TableCell>
-              
+
             </TableRow>
        
     </>
