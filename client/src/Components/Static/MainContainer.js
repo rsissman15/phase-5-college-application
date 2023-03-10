@@ -12,6 +12,7 @@ import Profile from './Profile/Profile';
 import { UserContext } from '../../Context/UserContext';
 import { CollegeContext } from '../../Context/CollegeContext';
 import { ApplicationContext } from '../../Context/ApplicationContext';
+import Fuse from 'fuse.js'
 
 
 
@@ -23,10 +24,15 @@ function MainContainer() {
   const [search, setSearch] = useState('')
   const [currentPage,setCurrentPage]=useState(1)
   const [collegesPerPage]=useState(225)
-
   const { setCurrentUser,setLoggedIn} = useContext(UserContext);
   const {colleges,setColleges}=useContext(CollegeContext)
   const {applications,setApplications}=useContext(ApplicationContext)
+  const fuse=new Fuse(colleges,{
+    keys:[
+      'name'
+    ]
+  })
+  const results=fuse.search(search)
 
 
 colleges.sort(function(a, b){
@@ -57,18 +63,28 @@ const paginate=(pageNumber)=>{
 
 
   const collegeData = useMemo(() => {
-    let computedCollege = colleges;
+   let computedCollege = colleges;
+    //let collegeResult=search ? results.map(result=>result.item) : colleges
+    let myArray = search.toLowerCase().split(" ");
+
+   
+    
   
     if (search) {
       setCurrentPage(1)
+
+      for (let i = 0; i < myArray.length; i++) {
         computedCollege = computedCollege.filter(
-            college =>
-            college.name.toLowerCase().includes(search.toLowerCase())
-        );
+          college =>
+          college.name.toLowerCase().includes(myArray[i])
+      );
+      }
+    
+    
     }
    
     //Current Page slice
-    return computedCollege.slice(
+    return   computedCollege.slice(
       (currentPage - 1) * collegesPerPage,
       (currentPage - 1) * collegesPerPage + collegesPerPage
   );

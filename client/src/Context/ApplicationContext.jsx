@@ -57,7 +57,7 @@ function ApplicationProvider ({ children }) {
         setApplications(applications.map((oldApplication) => oldApplication.id !== application.id ? oldApplication : { ...oldApplication, file_data: application.file_data}))
       }
 
-      console.log(applications)
+      
    
  
 

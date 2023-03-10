@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import Button from 'react-bootstrap/Button';
-import { header } from '../Globals.js';
 import { useNavigate } from 'react-router-dom'
 import Error from '../../Styles.js/Error.jsx';
 import Grid from '@mui/material/Grid';
@@ -50,8 +49,7 @@ const FileUpdate = ({application, handleUpdateFileApplication,setShowFileForm}) 
   
    }
 
-   console.log(file_data)
-    
+   
 
 
 

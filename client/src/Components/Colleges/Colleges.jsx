@@ -15,7 +15,7 @@ const Colleges = ({college}) => {
   return (
     <div> 
        <ul>
-       <Button padding="10px 60px" onClick={handleClick} variant="info" className="mx-auto mr-20" >Click for More Info</Button>
+       <Button padding="10px 60px" onClick={handleClick} variant="info" className='max-w-lg mx-auto' >Click for More Info</Button>
        &nbsp;&nbsp;&nbsp;
        {college.name}
 
