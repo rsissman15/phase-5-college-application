@@ -22,7 +22,7 @@ const BannerContainer = styled.div`
     background-size: cover;
     display: grid;
     place-items: center;
-    padding: 100px 0 800px 0;
+    padding: 50px 0 800px 0;
     box-shadow: inset 5px 5px 10px 4px #000000;
     backgroundSize: 'cover',
 `;

@@ -14,7 +14,6 @@ import Error from '../../Styles.js/Error';
 const ApplicationForm = ({colleges,submitApplication}) => {
     const { id }=useParams();
     let college=colleges.find(college=>college.id.toString()===id)
-
     const [majorType]= useState([
         "Architecture",
         "Arts & Museum Mgmt",
@@ -75,6 +74,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
     const[location]=useState(college.country)
     const[applicationDeadline,setApplicationDeadline]=useState('')
     const [fileData,setFileData]=useState(null)
+    
 
 
 
@@ -107,9 +107,6 @@ const ApplicationForm = ({colleges,submitApplication}) => {
 
         }
          
-
-
-    
         fetch(`/colleges/${college.id}/applications`, {
           method: "POST",
           body:formData 
@@ -119,6 +116,7 @@ const ApplicationForm = ({colleges,submitApplication}) => {
               response.json().then((data) =>{
                 submitApplication(data)
                 navigate('/applications') 
+                window.scrollTo(0, 0)
 
               });
           } 
