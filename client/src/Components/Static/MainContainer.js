@@ -12,7 +12,7 @@ import Profile from './Profile/Profile';
 import { UserContext } from '../../Context/UserContext';
 import { CollegeContext } from '../../Context/CollegeContext';
 import { ApplicationContext } from '../../Context/ApplicationContext';
-import Fuse from 'fuse.js'
+//import Fuse from 'fuse.js'
 
 
 
@@ -27,12 +27,12 @@ function MainContainer() {
   const { setCurrentUser,setLoggedIn} = useContext(UserContext);
   const {colleges,setColleges}=useContext(CollegeContext)
   const {applications,setApplications}=useContext(ApplicationContext)
-  const fuse=new Fuse(colleges,{
-    keys:[
-      'name'
-    ]
-  })
-  const results=fuse.search(search)
+  // const fuse=new Fuse(colleges,{
+  //   keys:[
+  //     'name'
+  //   ]
+  // })
+  // const results=fuse.search(search)
 
 
 colleges.sort(function(a, b){
@@ -68,11 +68,8 @@ const paginate=(pageNumber)=>{
     let myArray = search.toLowerCase().split(" ");
 
    
-    
-  
     if (search) {
       setCurrentPage(1)
-
       for (let i = 0; i < myArray.length; i++) {
         computedCollege = computedCollege.filter(
           college =>
